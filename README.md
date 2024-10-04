@@ -17,7 +17,7 @@ Program mengenai Sistem Persamaan Linier (SPL), Determinan, Interpolasi Polinomi
 ## Quick Links
 
 - [Features](#features)
-- [Getting Started](#getting-started)
+- [Step](#-step)
 - [Contributing](#contributing)
 - [Links](#links)
 - [Licensing](#licensing)
@@ -38,7 +38,7 @@ Program mengenai Sistem Persamaan Linier (SPL), Determinan, Interpolasi Polinomi
 6. Menghitung Regresi Linier Berganda
 7. Peningkatan Kualitas Gambar
 
-## Getting Started
+## Step
 
 Instruksi detail untuk instalasi dan penggunaan program akan ditampilkan segera.
 
