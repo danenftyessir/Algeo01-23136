@@ -66,7 +66,6 @@ public class IntroCalculator {
                 break;
             case 2:
                 System.out.println("Anda memilih: Determinan");
-                CustomizableMatrix.createAndAnalyzeMatrix();
                 break;
             case 3:
                 System.out.println("Anda memilih: Matriks balikan");
@@ -107,82 +106,5 @@ public class IntroCalculator {
         System.out.print("Pilih metode (1-4): ");
         int subChoice = getMenuChoice();
         System.out.println("Anda memilih metode " + subChoice);
-    }
-}
-
-class CustomizableMatrix {
-    public static void createAndAnalyzeMatrix() {
-        int[][] matrix = makeMatrix();
-        System.out.println("\nMatriks yang dimasukkan:");
-        printMatrix(matrix);   
-        if (isIdentityMatrix(matrix)) {
-            System.out.println("Matriks ini adalah matriks identitas.");
-        } else {
-            System.out.println("Matriks ini bukan matriks identitas.");
-        }
-    }
-    private static int[][] makeMatrix() {
-        System.out.print("Masukkan jumlah baris: ");
-        int rows = readInt();
-        System.out.print("Masukkan jumlah kolom: ");
-        int cols = readInt();   
-        int[][] matrix = new int[rows][cols];
-        System.out.println("Masukkan elemen-elemen matriks:");
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                System.out.print("Matriks[" + i + "][" + j + "]: ");
-                matrix[i][j] = readInt();
-            }
-        }
-        return matrix;
-    }
-    private static boolean isIdentityMatrix(int[][] matrix) {
-        if (matrix.length != matrix[0].length) {
-            return false;
-        }
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (i == j && matrix[i][j] != 1) {
-                    return false;
-                }
-                if (i != j && matrix[i][j] != 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    private static void printMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-    private static int readInt() {
-        int result = 0;
-        boolean isNegative = false;
-        int ch = 0;
-        while (true) {
-            try {
-                ch = System.in.read();
-                if (ch == '-') {
-                    isNegative = true;
-                    continue;
-                }
-                if (ch >= '0' && ch <= '9') {
-                    result = result * 10 + (ch - '0');
-                } else if (ch == '\n') {
-                    break;
-                }
-            } catch (java.io.IOException e) {
-                return 0;
-            }
-        }
-        if (isNegative) {
-            result = -result;
-        }
-        return result;
     }
 }
