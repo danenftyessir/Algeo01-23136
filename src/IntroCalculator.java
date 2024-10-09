@@ -1,4 +1,4 @@
-//Masukin librarynya disini
+// Class Utama
 
 public class IntroCalculator {
     public static void main(String[] args) {
