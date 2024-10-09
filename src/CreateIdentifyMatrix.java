@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class CreateIdentifyMatrix {
+    // Fungsi untuk membuat dan menganalisis matriks
     public static void createAndAnalyzeMatrix() {
         Scanner scanner = new Scanner(System.in);
         int rows, cols;
@@ -26,9 +27,7 @@ public class CreateIdentifyMatrix {
                 System.out.println("Jumlah kolom harus minimal 2.");
             }
         } while (cols < 2);
-
         int[][] matrix = new int[rows][cols];
-
         System.out.println("\nMasukkan elemen-elemen matriks:");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -41,15 +40,20 @@ public class CreateIdentifyMatrix {
                 matrix[i][j] = scanner.nextInt();
             }
         }
-
         System.out.println("\nMatriks yang dimasukkan:");
         printMatrix(matrix);
-
         identifyMatrix(matrix);
 
+        if (isSymmetric(matrix)) {
+            System.out.println("\nMatriks ini adalah matriks simetris.");
+        } else {
+            System.out.println("\nMatriks ini bukan matriks simetris.");
+        }
+        
         scanner.close();
     }
 
+    // Fungsi untuk menampilkan matriks
     public static void printMatrix(int[][] matrix) {
         for (int[] row : matrix) {
             for (int elem : row) {
@@ -59,6 +63,7 @@ public class CreateIdentifyMatrix {
         }
     }
 
+    // Fungsi untuk mengidentifikasi matriks nol atau matriks identitas
     public static void identifyMatrix(int[][] matrix) {
         boolean isZeroMatrix = true;
         boolean isIdentityMatrix = true;
@@ -78,7 +83,6 @@ public class CreateIdentifyMatrix {
                 }
             }
         }
-
         if (isZeroMatrix) {
             System.out.println("\nMatriks ini adalah matriks nol.");
         } else if (isIdentityMatrix && rows == cols) {
@@ -87,3 +91,19 @@ public class CreateIdentifyMatrix {
             System.out.println("\nMatriks ini bukan matriks nol atau matriks identitas.");
         }
     }
+
+    // Fungsi untuk memeriksa apakah matriksnya simetris
+    public static boolean isSymmetric(int[][] matrix) {
+        if (matrix.length != matrix[0].length) {
+            return false;
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (matrix[i][j] != matrix[j][i]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
