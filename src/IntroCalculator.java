@@ -68,6 +68,7 @@ public class IntroCalculator {
                 break;
             case 2:
                 System.out.println("Anda memilih: Determinan");
+                determinantMenu();
                 break;
             case 3:
                 System.out.println("Anda memilih: Matriks balikan");
@@ -230,6 +231,14 @@ public class IntroCalculator {
             default:
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
         }
+    }
+
+    private static void determinantMenu() {
+        MatrixInputSystem matrixInputSystem = new MatrixInputSystem();
+        matrixInputSystem.inputMatrix();
+        double[][] matrix_det = matrixInputSystem.getMatrix();
+        double determinant = DeterminantCalculator.calculateDeterminant(matrix_det);
+        System.out.printf("Determinan matriks adalah %.2f\n", determinant);
     }
 }
 
