@@ -129,9 +129,4 @@ public class LinearEquationInputSystem {
         }
         return input.toString().trim();
     }
-
-    public static void main(String[] args) {
-        LinearEquationInputSystem system = new LinearEquationInputSystem();
-        system.inputLinearEquations();
-    }
 }
