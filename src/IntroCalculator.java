@@ -13,7 +13,7 @@ public class IntroCalculator {
     private static void displayMainMenu() {
         System.out.println("\n\n");
         System.out.println("╔═══════════════════════════════════════════════╗");
-        System.out.println("║             KALKULATOR MATRIKS                ║");
+        System.out.println("║           KALKULATOR MATRIKS REEVES           ║");
         System.out.println("╠═══════════════════════════════════════════════╣");
         System.out.println("║  1. Sistem Persamaan Linier                   ║");
         System.out.println("║  2. Determinan                                ║");
