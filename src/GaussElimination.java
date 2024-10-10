@@ -75,7 +75,7 @@ public class GaussElimination {
         return matrix;
     }
 
-    private static double[] backSubstitution(double[][] matrix) {
+    public static double[] backSubstitution(double[][] matrix) {
         int n = matrix.length;
         double[] solutions = new double[n];
 
