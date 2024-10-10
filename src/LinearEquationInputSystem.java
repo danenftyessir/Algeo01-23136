@@ -27,6 +27,10 @@ public class LinearEquationInputSystem {
         System.out.println("=== Sistem Input Persamaan Linear ===");
         this.numEquations = readInt("\nMasukkan jumlah persamaan (1-4): ", 1, 4);
         this.numVariables = readInt("Masukkan jumlah variabel (1-4): ", 1, 4);
+        // Validasi bahwa numEquations dan numVariables berjumlah sama, kalau tidak, break
+        if (this.numEquations != this.numVariables) {
+            return;
+        }
         this.coefficients = new double[getNumEquations()][getNumVariables() + 1];
 
         System.out.println("\nMasukkan koefisien dan konstanta untuk setiap persamaan.");
