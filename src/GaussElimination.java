@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class GaussJordanElimination {
+public class GaussElimination {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -18,22 +18,24 @@ public class GaussJordanElimination {
             }
         }
 
-        double[][] reducedRowEchelonForm = gaussJordanElimination(augmentedMatrix);
-        System.out.println("\nMatriks eselon tereduksi:");
-        printMatrix(reducedRowEchelonForm);  // Cetak matriks setelah tereduksi
+        double[][] rowEchelonForm = gaussElimination(augmentedMatrix);
+
+        System.out.println("\nMatriks setelah eliminasi Gauss:");
+        printMatrix(rowEchelonForm);
 
         boolean hasUniqueSolution = true;
         for (int i = 0; i < n; i++) {
-            if (reducedRowEchelonForm[i][i] == 0) {
+            if (rowEchelonForm[i][i] == 0) {
                 hasUniqueSolution = false;
                 break;
             }
         }
 
         if (hasUniqueSolution) {
+            double[] solutions = backSubstitution(rowEchelonForm);
             System.out.println("\nHasil SPL:");
             for (int i = 0; i < n; i++) {
-                System.out.printf("x%d = %.2f\n", i + 1, reducedRowEchelonForm[i][n]);
+                System.out.printf("x%d = %.2f\n", i + 1, solutions[i]);
             }
         } else {
             System.out.println("\nMatriks adalah singular atau tidak memiliki solusi unik.");
@@ -42,8 +44,7 @@ public class GaussJordanElimination {
         scanner.close();
     }
 
-
-    public static double[][] gaussJordanElimination(double[][] matrix) {
+    public static double[][] gaussElimination(double[][] matrix) {
         int rows = matrix.length;
         int cols = matrix[0].length;
 
@@ -62,17 +63,11 @@ public class GaussJordanElimination {
                 }
             }
 
-            double pivot = matrix[i][i];
-            for (int k = 0; k < cols; k++) {
-                matrix[i][k] /= pivot;
-            }
-
-            for (int j = 0; j < rows; j++) {
-                if (j != i) {
-                    double factor = matrix[j][i];
-                    for (int k = 0; k < cols; k++) {
-                        matrix[j][k] -= factor * matrix[i][k];
-                    }
+            // Eliminasi Gauss di bawah pivot
+            for (int j = i + 1; j < rows; j++) {
+                double factor = matrix[j][i] / matrix[i][i];
+                for (int k = i; k < cols; k++) {
+                    matrix[j][k] -= factor * matrix[i][k];
                 }
             }
         }
@@ -80,11 +75,27 @@ public class GaussJordanElimination {
         return matrix;
     }
 
+    private static double[] backSubstitution(double[][] matrix) {
+        int n = matrix.length;
+        double[] solutions = new double[n];
+
+        for (int i = n - 1; i >= 0; i--) {
+            solutions[i] = matrix[i][n];
+            for (int j = i + 1; j < n; j++) {
+                solutions[i] -= matrix[i][j] * solutions[j];
+            }
+            solutions[i] /= matrix[i][i];
+        }
+
+        return solutions;
+    }
+
     private static void swapRows(double[][] matrix, int row1, int row2) {
         double[] temp = matrix[row1];
         matrix[row1] = matrix[row2];
         matrix[row2] = temp;
     }
+
     private static void printMatrix(double[][] matrix) {
         for (double[] row : matrix) {
             for (double element : row) {
