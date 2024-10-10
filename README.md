@@ -35,7 +35,7 @@ Program mengenai Sistem Persamaan Linier (SPL), Determinan, Interpolasi Polinomi
 3. Menghitung Matriks Balikan (Invers)
 4. Menghitung Interpolasi Polinomial
 5. Menghitung Interpolasi Bicubic Spline
-6. Menghitung Regresi Linier Berganda
+6. Menghitung Regresi Linier dan Kuadratik Berganda
 7. Peningkatan Kualitas Gambar
 
 ## Step
