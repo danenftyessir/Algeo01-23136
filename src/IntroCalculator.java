@@ -75,7 +75,8 @@ public class IntroCalculator {
                 InverseMenu.displayInverseMenu();
                 break;
             case 4:
-                System.out.println("Anda memilih: Interpolasi Polinom");
+                System.out.println("Anda memilih: Interpolasi Polinomial");
+                PolynomialInterpolationMenu.displayPolynomialInterpolationMenu();
                 break;
             case 5:
                 System.out.println("Anda memilih: Interpolasi Bicubic Spline");
