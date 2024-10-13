@@ -72,6 +72,7 @@ public class IntroCalculator {
                 break;
             case 3:
                 System.out.println("Anda memilih: Matriks balikan");
+                InverseMenu.displayInverseMenu();
                 break;
             case 4:
                 System.out.println("Anda memilih: Interpolasi Polinom");

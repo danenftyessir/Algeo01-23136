@@ -1,9 +1,9 @@
 public class BasicOperationMatrix {
     // Fungsi untuk melakukan transpose matriks
-    public static int[][] transposeMatrix(int[][] matrix) {
+    public static double[][] transposeMatrix(double[][] matrix) {
         int rows = matrix.length;
         int cols = matrix[0].length;
-        int[][] transposed = new int[cols][rows];
+        double[][] transposed = new double[cols][rows];
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {

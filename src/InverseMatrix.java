@@ -97,4 +97,49 @@ public class InverseMatrix {
 
         return inverseMatrix;
     }
+    public static double[][] matrixInverseAdjoint(double[][] matrix) {
+        int n = matrix.length;
+        double det = DeterminantCalculator.calculateDeterminant(matrix);
+        if (det == 0) {
+            return null; // Matriks singular tidak memiliki invers
+        }
+        // Hitung adjoin, yaitu transpos dari matriks kofaktor
+        double[][] cofactorMatrix = cofactor(matrix);
+        double[][] adjointMatrix = BasicOperationMatrix.transposeMatrix(cofactorMatrix);
+        
+        // Bagi matriks adjoin dengan determinan untuk mendapatkan invers
+        double[][] inverseMatrix = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                inverseMatrix[i][j] = adjointMatrix[i][j] / det;
+            }
+        }
+        return inverseMatrix;
+    }
+    public static double[][] cofactor(double[][] matrix) {
+        int n = matrix.length;
+        double[][] cofactorMatrix = new double[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cofactorMatrix[i][j] = Math.pow(-1, i + j) * DeterminantCalculator.calculateDeterminant(minor(matrix, i, j));
+            }
+        }
+        return cofactorMatrix;
+    }
+    public static double[][] minor(double[][] matrix, int row, int col) {
+        int n = matrix.length;
+        double[][] minor = new double[n - 1][n - 1];
+        int r = 0;
+        for (int i = 0; i < n; i++) {
+            if (i == row) continue; // Lewati baris yang dihapus
+            int c = 0;
+            for (int j = 0; j < n; j++) {
+                if (j == col) continue; // Lewati kolom yang dihapus
+                minor[r][c] = matrix[i][j];
+                c++;
+            }
+            r++;
+        }
+        return minor;
+    }
 }
