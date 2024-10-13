@@ -1,57 +1,18 @@
 import java.util.Scanner;
 
 public class CramerRule {
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Masukkan jumlah variabel (n): ");
-        int n = scanner.nextInt();
-
-        double[][] coefficients = new double[n][n];
-        double[] constants = new double[n];
-
-        System.out.println("Masukkan koefisien dan konstanta untuk setiap persamaan:");
-        for (int i = 0; i < n; i++) {
-            System.out.printf("Persamaan %d:\n", i + 1);
-            for (int j = 0; j < n; j++) {
-                System.out.printf("Masukkan koefisien x%d: ", j + 1);
-                coefficients[i][j] = scanner.nextDouble();
-            }
-            System.out.printf("Masukkan konstanta untuk persamaan %d: ", i + 1);
-            constants[i] = scanner.nextDouble();
-        }
-
-        double[] solution = solveUsingCramer(coefficients, constants);
-
-        if (solution != null) {
-            System.out.println("\nSolusi SPL:");
-            for (int i = 0; i < n; i++) {
-                System.out.printf("x%d = %.2f\n", i + 1, solution[i]);
-            }
-        } else {
-            System.out.println("\nSPL tidak memiliki solusi unik (matriks koefisien singular).");
-        }
-
-        scanner.close();
-    }
-
     public static double[] solveUsingCramer(double[][] coefficients, double[] constants) {
         int n = coefficients.length;
         double determinant = calculateDeterminant(coefficients);
-
         if (determinant == 0) {
             return null; // Matriks koefisien singular, tidak ada solusi unik
         }
-
         double[] solution = new double[n];
-
         for (int i = 0; i < n; i++) {
             double[][] modifiedMatrix = modifyMatrix(coefficients, constants, i);
             double modifiedDeterminant = calculateDeterminant(modifiedMatrix);
             solution[i] = modifiedDeterminant / determinant;
         }
-
         return solution;
     }
 
@@ -77,9 +38,13 @@ public class CramerRule {
                     subMatrix[row - 1][subCol++] = matrix[row][col];
                 }
             }
-            determinant += Math.pow(-1, i) * matrix[0][i] * calculateDeterminant(subMatrix);
+            double subDeterminant = calculateDeterminant(subMatrix);
+            if (i % 2 == 0) {
+                determinant += matrix[0][i] * subDeterminant;
+            } else {
+                determinant -= matrix[0][i] * subDeterminant;
+            }
         }
-
         return determinant;
     }
 
@@ -99,5 +64,39 @@ public class CramerRule {
         }
 
         return modifiedMatrix;
+    }
+
+    public static void displaySolution(double[] solution) {
+        if (solution == null) {
+            System.out.println("\nSPL tidak memiliki solusi unik (matriks koefisien singular).");
+        } else {
+            System.out.println("\nSolusi SPL:");
+            for (int i = 0; i < solution.length; i++) {
+                System.out.printf("x%d = %.4f\n", i + 1, solution[i]);
+            }
+        }
+    }
+
+    public static double[][] inputCoefficients(Scanner scanner, int n) {
+        double[][] coefficients = new double[n][n];
+        System.out.println("Masukkan koefisien untuk setiap persamaan:");
+        for (int i = 0; i < n; i++) {
+            System.out.printf("Persamaan %d:\n", i + 1);
+            for (int j = 0; j < n; j++) {
+                System.out.printf("Masukkan koefisien x%d: ", j + 1);
+                coefficients[i][j] = scanner.nextDouble();
+            }
+        }
+        return coefficients;
+    }
+
+    public static double[] inputConstants(Scanner scanner, int n) {
+        double[] constants = new double[n];
+        System.out.println("Masukkan konstanta untuk setiap persamaan:");
+        for (int i = 0; i < n; i++) {
+            System.out.printf("Masukkan konstanta untuk persamaan %d: ", i + 1);
+            constants[i] = scanner.nextDouble();
+        }
+        return constants;
     }
 }
