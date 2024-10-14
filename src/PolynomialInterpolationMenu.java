@@ -5,23 +5,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class PolynomialInterpolationMenu {
+    // Fungsi untuk menampilkan menu interpolasi polinom di IntroCalculator (Main Class)
     public static void displayPolynomialInterpolationMenu() {
         Scanner scanner = new Scanner(System.in);
         double[][] points = inputData(scanner);
-        
         if (points == null) {
             System.out.println("Kembali ke menu utama.");
             return;
         }
-
         if (points.length < 2) {
             System.out.println("Jumlah titik tidak valid. Minimal dibutuhkan 2 titik.");
             return;
         }
-
         System.out.print("Masukkan nilai x yang ingin ditaksir: ");
         double xEstimate = scanner.nextDouble();
-
         if (xEstimate < points[0][0] || xEstimate > points[points.length - 1][0]) {
             System.out.println("Peringatan: Nilai x berada di luar rentang data input.");
         }
@@ -29,11 +26,11 @@ public class PolynomialInterpolationMenu {
         double[] coefficients = calculateCoefficients(points);
         String polynomialString = getPolynomialString(coefficients);
         double result = evaluatePolynomial(coefficients, xEstimate);
-
         System.out.println("f(x) = " + polynomialString);
         System.out.println("f(" + formatDouble(xEstimate) + ") = " + formatDouble(result));
     }
 
+    // Fungsi untuk input data dari keyboard atau file
     private static double[][] inputData(Scanner scanner) {
         System.out.println("/== Pilih metode input ==/");
         System.out.println("/ 1. Input dari keyboard /");
@@ -51,16 +48,15 @@ public class PolynomialInterpolationMenu {
         }
     }
 
+    // Fungsi untuk input data dari keyboard
     private static double[][] inputFromKeyboard(Scanner scanner) {
         System.out.print("Masukkan jumlah titik: ");
         int n = scanner.nextInt();
         ArrayList<double[]> pointsList = new ArrayList<>();
-        
         for (int i = 0; i < n; i++) {
             System.out.print("Masukkan titik ke-" + (i + 1) + " (x y): ");
             double x = scanner.nextDouble();
             double y = scanner.nextDouble();
-            
             if (i > 0 && x <= pointsList.get(i-1)[0]) {
                 System.out.println("Nilai x harus unik dan terurut. Masukkan ulang titik ini!");
                 i--;
@@ -72,13 +68,12 @@ public class PolynomialInterpolationMenu {
         return pointsList.toArray(new double[0][]);
     }
 
+    // Fungsi untuk input data dari file
     private static double[][] inputFromFile(Scanner scanner) {
         ArrayList<double[]> pointsList = new ArrayList<>();
-        
         while (true) {
             System.out.print("Masukkan nama file (atau ketik 'menu' untuk kembali): ");
             String fileName = scanner.next();
-
             if (fileName.equalsIgnoreCase("menu")) {
                 return null;
             }
@@ -97,13 +92,11 @@ public class PolynomialInterpolationMenu {
                     try {
                         double x = Double.parseDouble(parts[0]);
                         double y = Double.parseDouble(parts[1]);
-                        
                         if (!pointsList.isEmpty() && x <= pointsList.get(pointsList.size() - 1)[0]) {
                             System.out.println("Error: Nilai x harus unik dan terurut pada baris " + lineNumber);
                             pointsList.clear();
                             break;
-                        }
-                        
+                        }       
                         pointsList.add(new double[]{x, y});
                     } catch (NumberFormatException e) {
                         System.out.println("Error: Input bukan angka pada baris " + lineNumber);
@@ -111,14 +104,11 @@ public class PolynomialInterpolationMenu {
                         break;
                     }
                 }
-
                 if (pointsList.size() < 2) {
                     System.out.println("Error: File harus berisi minimal 2 titik.");
                     continue;
                 }
-
                 return pointsList.toArray(new double[0][]);
-
             } catch (IOException e) {
                 System.out.println("Error: Tidak dapat membaca file " + fileName);
                 System.out.println("Silakan masukkan ulang nama file atau ketik 'menu' untuk kembali.");
@@ -126,10 +116,10 @@ public class PolynomialInterpolationMenu {
         }
     }
 
+    // Fungsi untuk menghitung koefisien polinom interpolasi
     private static double[] calculateCoefficients(double[][] points) {
         int n = points.length;
         double[][] matrix = new double[n][n + 1];
-
         for (int i = 0; i < n; i++) {
             double x = points[i][0];
             double y = points[i][1];
@@ -140,11 +130,11 @@ public class PolynomialInterpolationMenu {
             }
             matrix[i][n] = y;
         }
-
         matrix = GaussElimination.gaussElimination(matrix);
         return GaussElimination.backSubstitution(matrix);
     }
 
+    // Fungsi untuk mendapatkan string polinom
     private static String getPolynomialString(double[] coefficients) {
         StringBuilder sb = new StringBuilder();
         boolean isFirst = true;
@@ -157,7 +147,6 @@ public class PolynomialInterpolationMenu {
                 } else if (coeff < 0) {
                     sb.append(" - ");
                 }
-
                 coeff = abs(coeff);
                 if (i == 0 || coeff != 1) {
                     sb.append(formatDouble(coeff));
@@ -169,7 +158,6 @@ public class PolynomialInterpolationMenu {
                         sb.append("^").append(i);
                     }
                 }
-
                 isFirst = false;
             }
         }
@@ -177,6 +165,7 @@ public class PolynomialInterpolationMenu {
         return sb.toString();
     }
 
+    // Fungsi evaluasi polinom
     private static double evaluatePolynomial(double[] coefficients, double x) {
         double result = 0;
         double xPower = 1;
@@ -187,6 +176,7 @@ public class PolynomialInterpolationMenu {
         return result;
     }
 
+    // Fungsi nilai absolut
     private static double abs(double x) {
         if (x < 0) {
             return -x;
@@ -195,6 +185,7 @@ public class PolynomialInterpolationMenu {
         }
     }
 
+    // Format double untuk menghilangkan trailing zero
     private static String formatDouble(double x) {
         long intPart = (long) x;
         if (x == intPart) {
