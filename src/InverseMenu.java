@@ -1,4 +1,5 @@
 public class InverseMenu {
+    // Fungsi untuk menampilkan menu matriks balikan di IntroCalculator (Main Class)
     public static void displayInverseMenu() {
         System.out.println("\n╔═══════════════════════════════════════════════╗");
         System.out.println("║               MATRIKS BALIKAN                 ║");
