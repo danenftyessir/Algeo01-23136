@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,14 +23,19 @@ public class PolynomialInterpolationMenu {
         if (xEstimate < points[0][0] || xEstimate > points[points.length - 1][0]) {
             System.out.println("Peringatan: Nilai x berada di luar rentang data input.");
         }
-
         double[] coefficients = calculateCoefficients(points);
         String polynomialString = getPolynomialString(coefficients);
         double result = evaluatePolynomial(coefficients, xEstimate);
-        System.out.println("f(x) = " + polynomialString);
-        System.out.println("f(" + formatDouble(xEstimate) + ") = " + formatDouble(result));
-    }
+        String output = "f(x) = " + polynomialString + "\n";
+        output += "f(" + formatDouble(xEstimate) + ") = " + formatDouble(result);
+        System.out.println(output);
 
+        System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
+        String saveChoice = scanner.next();
+        if (saveChoice.equalsIgnoreCase("y")) {
+            saveToFile(output, scanner);
+        }
+    }
     // Fungsi untuk input data dari keyboard atau file
     private static double[][] inputData(Scanner scanner) {
         System.out.println("/== Pilih metode input ==/");
@@ -37,7 +43,6 @@ public class PolynomialInterpolationMenu {
         System.out.println("/ 2. Input dari file     /");
         System.out.println("/========================/");
         int choice = scanner.nextInt();
-
         if (choice == 1) {
             return inputFromKeyboard(scanner);
         } else if (choice == 2) {
@@ -64,20 +69,19 @@ public class PolynomialInterpolationMenu {
                 pointsList.add(new double[]{x, y});
             }
         }
-        
         return pointsList.toArray(new double[0][]);
     }
 
     // Fungsi untuk input data dari file
-    private static double[][] inputFromFile(Scanner scanner) {
+    static double[][] inputFromFile(Scanner scanner) {
         ArrayList<double[]> pointsList = new ArrayList<>();
+        
         while (true) {
             System.out.print("Masukkan nama file (atau ketik 'menu' untuk kembali): ");
             String fileName = scanner.next();
             if (fileName.equalsIgnoreCase("menu")) {
                 return null;
             }
-
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
                 String line;
                 int lineNumber = 0;
@@ -96,7 +100,7 @@ public class PolynomialInterpolationMenu {
                             System.out.println("Error: Nilai x harus unik dan terurut pada baris " + lineNumber);
                             pointsList.clear();
                             break;
-                        }       
+                        }
                         pointsList.add(new double[]{x, y});
                     } catch (NumberFormatException e) {
                         System.out.println("Error: Input bukan angka pada baris " + lineNumber);
@@ -138,7 +142,6 @@ public class PolynomialInterpolationMenu {
     private static String getPolynomialString(double[] coefficients) {
         StringBuilder sb = new StringBuilder();
         boolean isFirst = true;
-
         for (int i = coefficients.length - 1; i >= 0; i--) {
             double coeff = coefficients[i];
             if (coeff != 0) {
@@ -151,7 +154,6 @@ public class PolynomialInterpolationMenu {
                 if (i == 0 || coeff != 1) {
                     sb.append(formatDouble(coeff));
                 }
-
                 if (i > 0) {
                     sb.append("x");
                     if (i > 1) {
@@ -186,7 +188,7 @@ public class PolynomialInterpolationMenu {
     }
 
     // Format double untuk menghilangkan trailing zero
-    private static String formatDouble(double x) {
+    static String formatDouble(double x) {
         long intPart = (long) x;
         if (x == intPart) {
             return Long.toString(intPart);
@@ -200,4 +202,17 @@ public class PolynomialInterpolationMenu {
         }
         return formatted;
     }
+
+        // Fungsi untuk menyimpan hasil ke file
+        private static void saveToFile(String content, Scanner scanner) {
+        System.out.print("Masukkan nama file untuk menyimpan hasil: ");
+        String fileName = scanner.next();
+        try (FileWriter writer = new FileWriter(fileName)) {
+            writer.write(content);
+            System.out.println("Hasil berhasil disimpan ke file: " + fileName);
+        } catch (IOException e) {
+            System.out.println("Terjadi kesalahan saat menyimpan file: " + e.getMessage());
+        }
+    }
+
 }
