@@ -26,23 +26,27 @@ public class SPLMenu {
                     System.out.println("Jumlah persamaan dan variabel tidak sama. Silakan coba lagi.");
                     break;
                 }
+
                 double[][] rowEchelonForm = GaussElimination.gaussElimination(augmentedMatrix);
-                boolean hasUniqueSolution = true;
-                for (int i = 0; i < n; i++) {
-                    if (rowEchelonForm[i][i] == 0) {
-                        hasUniqueSolution = false;
-                        break;
-                    }
-                }
+                System.out.println("\nMatriks setelah eliminasi Gauss:");
+                GaussElimination.printMatrix(rowEchelonForm);
+
+                int rank = GaussElimination.calculateRank(rowEchelonForm);
+                int numVariables = n;
         
-                if (hasUniqueSolution) {
+                if (rank < numVariables) {
+                    if (GaussElimination.hasInconsistentSystem(rowEchelonForm, rank)) {
+                        System.out.println("\nTidak ada solusi.");
+                    } else {
+                        System.out.println("\nSistem memiliki solusi banyak (parametrik).");
+                        GaussElimination.printParametricSolution(rowEchelonForm, rank);
+                    }
+                } else {
                     double[] solutions = GaussElimination.backSubstitution(rowEchelonForm);
                     System.out.println("\nHasil SPL:");
                     for (int i = 0; i < n; i++) {
                         System.out.printf("x%d = %.2f\n", i + 1, solutions[i]);
                     }
-                } else {
-                    System.out.println("\nMatriks adalah singular atau tidak memiliki solusi unik.");
                 }
                 break;
             case 2:
@@ -56,21 +60,24 @@ public class SPLMenu {
                     break;
                 }
                 double[][] reducedRowEchelonForm = GaussJordanElimination.gaussJordanElimination(augmentedMatrix);
-                hasUniqueSolution = true;
-                for (int i = 0; i < n; i++) {
-                    if (reducedRowEchelonForm[i][i] == 0) {
-                        hasUniqueSolution = false;
-                        break;
-                    }
-                }
+                System.out.println("\nMatriks setelah eliminasi Gauss-Jordan:");
+                GaussElimination.printMatrix(reducedRowEchelonForm);
+
+                rank = GaussJordanElimination.calculateRank(reducedRowEchelonForm);
+                numVariables = n;
         
-                if (hasUniqueSolution) {
+                if (rank < numVariables) {
+                    if (GaussJordanElimination.hasInconsistentSystem(reducedRowEchelonForm, rank)) {
+                        System.out.println("\nTidak ada solusi.");
+                    } else {
+                        System.out.println("\nSistem memiliki solusi banyak (parametrik).");
+                        GaussJordanElimination.printParametricSolution(reducedRowEchelonForm, rank);
+                    }
+                } else {
                     System.out.println("\nHasil SPL:");
                     for (int i = 0; i < n; i++) {
                         System.out.printf("x%d = %.2f\n", i + 1, reducedRowEchelonForm[i][n]);
                     }
-                } else {
-                    System.out.println("\nMatriks adalah singular atau tidak memiliki solusi unik.");
                 }
                 break;
             case 3:
