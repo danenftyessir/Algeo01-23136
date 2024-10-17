@@ -10,24 +10,31 @@ public class PolynomialInterpolationMenu {
     public static void displayPolynomialInterpolationMenu() {
         Scanner scanner = new Scanner(System.in);
         double[][] points = inputData(scanner);
+        
         if (points == null) {
             System.out.println("Kembali ke menu utama.");
             return;
         }
+
         if (points.length < 2) {
             System.out.println("Jumlah titik tidak valid. Minimal dibutuhkan 2 titik.");
             return;
         }
+
         System.out.print("Masukkan nilai x yang ingin ditaksir: ");
         double xEstimate = scanner.nextDouble();
+
         if (xEstimate < points[0][0] || xEstimate > points[points.length - 1][0]) {
             System.out.println("Peringatan: Nilai x berada di luar rentang data input.");
         }
+
         double[] coefficients = calculateCoefficients(points);
         String polynomialString = getPolynomialString(coefficients);
         double result = evaluatePolynomial(coefficients, xEstimate);
+
         String output = "f(x) = " + polynomialString + "\n";
-        output += "f(" + formatDouble(xEstimate) + ") = " + formatDouble(result);
+        output = output + "f(" + formatDouble(xEstimate) + ") = " + formatDouble(result);
+
         System.out.println(output);
 
         System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
@@ -42,7 +49,9 @@ public class PolynomialInterpolationMenu {
         System.out.println("/ 1. Input dari keyboard /");
         System.out.println("/ 2. Input dari file     /");
         System.out.println("/========================/");
+        System.out.print("Pilihan Anda: ");
         int choice = scanner.nextInt();
+
         if (choice == 1) {
             return inputFromKeyboard(scanner);
         } else if (choice == 2) {
@@ -58,16 +67,20 @@ public class PolynomialInterpolationMenu {
         System.out.print("Masukkan jumlah titik: ");
         int n = scanner.nextInt();
         ArrayList<double[]> pointsList = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
+        
+        int i = 0;
+        while (i < n) {
             System.out.print("Masukkan titik ke-" + (i + 1) + " (x y): ");
             double x = scanner.nextDouble();
             double y = scanner.nextDouble();
-            if (i > 0 && x <= pointsList.get(i-1)[0]) {
+            if (i > 0 && x <= pointsList.get(i - 1)[0]) {
                 System.out.println("Nilai x harus unik dan terurut. Masukkan ulang titik ini!");
-                i--;
+                // i--; // Menghindari penggunaan unary operator
+                i = i - 1;
             } else {
                 pointsList.add(new double[]{x, y});
             }
+            i = i + 1;
         }
         return pointsList.toArray(new double[0][]);
     }
@@ -85,12 +98,14 @@ public class PolynomialInterpolationMenu {
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
                 String line;
                 int lineNumber = 0;
+                boolean isValid = true;
                 while ((line = reader.readLine()) != null) {
-                    lineNumber++;
+                    lineNumber = lineNumber + 1;
                     String[] parts = line.trim().split("\\s+");
                     if (parts.length != 2) {
                         System.out.println("Error: Format tidak valid pada baris " + lineNumber);
                         pointsList.clear();
+                        isValid = false;
                         break;
                     }
                     try {
@@ -99,20 +114,23 @@ public class PolynomialInterpolationMenu {
                         if (!pointsList.isEmpty() && x <= pointsList.get(pointsList.size() - 1)[0]) {
                             System.out.println("Error: Nilai x harus unik dan terurut pada baris " + lineNumber);
                             pointsList.clear();
+                            isValid = false;
                             break;
                         }
                         pointsList.add(new double[]{x, y});
                     } catch (NumberFormatException e) {
                         System.out.println("Error: Input bukan angka pada baris " + lineNumber);
                         pointsList.clear();
+                        isValid = false;
                         break;
                     }
                 }
-                if (pointsList.size() < 2) {
+                if (isValid && pointsList.size() >= 2) {
+                    return pointsList.toArray(new double[0][]);
+                } else {
                     System.out.println("Error: File harus berisi minimal 2 titik.");
                     continue;
                 }
-                return pointsList.toArray(new double[0][]);
             } catch (IOException e) {
                 System.out.println("Error: Tidak dapat membaca file " + fileName);
                 System.out.println("Silakan masukkan ulang nama file atau ketik 'menu' untuk kembali.");
@@ -124,15 +142,19 @@ public class PolynomialInterpolationMenu {
     private static double[] calculateCoefficients(double[][] points) {
         int n = points.length;
         double[][] matrix = new double[n][n + 1];
-        for (int i = 0; i < n; i++) {
+        int i = 0;
+        while (i < n) {
             double x = points[i][0];
             double y = points[i][1];
             double xPower = 1;
-            for (int j = 0; j < n; j++) {
+            int j = 0;
+            while (j < n) {
                 matrix[i][j] = xPower;
                 xPower = xPower * x;
+                j = j + 1;
             }
             matrix[i][n] = y;
+            i = i + 1;
         }
         matrix = GaussElimination.gaussElimination(matrix);
         return GaussElimination.backSubstitution(matrix);
@@ -142,7 +164,8 @@ public class PolynomialInterpolationMenu {
     private static String getPolynomialString(double[] coefficients) {
         StringBuilder sb = new StringBuilder();
         boolean isFirst = true;
-        for (int i = coefficients.length - 1; i >= 0; i--) {
+        int i = coefficients.length - 1;
+        while (i >= 0) {
             double coeff = coefficients[i];
             if (coeff != 0) {
                 if (coeff > 0 && !isFirst) {
@@ -157,13 +180,14 @@ public class PolynomialInterpolationMenu {
                 if (i > 0) {
                     sb.append("x");
                     if (i > 1) {
-                        sb.append("^").append(i);
+                        sb.append("^");
+                        sb.append(i);
                     }
                 }
                 isFirst = false;
             }
+            i = i - 1;
         }
-
         return sb.toString();
     }
 
@@ -171,9 +195,11 @@ public class PolynomialInterpolationMenu {
     private static double evaluatePolynomial(double[] coefficients, double x) {
         double result = 0;
         double xPower = 1;
-        for (int i = 0; i < coefficients.length; i++) {
+        int i = 0;
+        while (i < coefficients.length) {
             result = result + coefficients[i] * xPower;
             xPower = xPower * x;
+            i = i + 1;
         }
         return result;
     }
@@ -181,7 +207,7 @@ public class PolynomialInterpolationMenu {
     // Fungsi nilai absolut
     private static double abs(double x) {
         if (x < 0) {
-            return -x;
+            return 0 - x;
         } else {
             return x;
         }
@@ -203,10 +229,14 @@ public class PolynomialInterpolationMenu {
         return formatted;
     }
 
-        // Fungsi untuk menyimpan hasil ke file
-        private static void saveToFile(String content, Scanner scanner) {
-        System.out.print("Masukkan nama file untuk menyimpan hasil: ");
+    // Fungsi untuk menyimpan hasil ke file
+    private static void saveToFile(String content, Scanner scanner) {
+        System.out.print("Masukkan nama file untuk menyimpan hasil (tanpa ekstensi .txt): ");
         String fileName = scanner.next();
+        // Memastikan nama file memiliki ekstensi .txt
+        if (!fileName.endsWith(".txt")) {
+            fileName = fileName + ".txt";
+        }
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(content);
             System.out.println("Hasil berhasil disimpan ke file: " + fileName);
@@ -214,5 +244,4 @@ public class PolynomialInterpolationMenu {
             System.out.println("Terjadi kesalahan saat menyimpan file: " + e.getMessage());
         }
     }
-
 }
