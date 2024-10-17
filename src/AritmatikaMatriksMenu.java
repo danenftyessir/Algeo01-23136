@@ -1,7 +1,9 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class AritmatikaMatriksMenu {
+    private static Scanner scanner = new Scanner(System.in);
     public static void displayAritmatikaMatriksMenu() {
         System.out.println("\n╔═══════════════════════════════════════════════╗");
         System.out.println("║               Aritmatika Matriks              ║");
@@ -11,17 +13,20 @@ public class AritmatikaMatriksMenu {
         System.out.println("║  3. Perkalian                                 ║");
         System.out.println("╚═══════════════════════════════════════════════╝");
         System.out.print("Pilih metode (1-3): ");
-        int subChoice = Integer.parseInt(readLine());
+        int subChoice = scanner.nextInt();
+        scanner.nextLine();
         while (subChoice < 1 || subChoice > 3) {
             System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             System.out.print("Pilih metode (1-3): ");
-            subChoice = Integer.parseInt(readLine());
+            subChoice = scanner.nextInt();
+            scanner.nextLine();
         }
         switch (subChoice) {
             case 1:
                 System.out.println("Anda memilih: Penjumlahan Matriks");
                 System.out.print("Berapa banyak matriks yang ingin dijumlahkan? ");
-                int matrixCountAdd = Integer.parseInt(readLine());
+                int matrixCountAdd = scanner.nextInt();
+                scanner.nextLine();
                 if (matrixCountAdd < 2) {
                     System.out.println("Anda harus memasukkan minimal dua matriks.");
                     return;
@@ -39,17 +44,24 @@ public class AritmatikaMatriksMenu {
                     } resultAdd.append("\n"); 
                 }
                 System.out.println(resultAdd.toString());
-                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n) ");
-                String saveChoice = readLine();
+                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n)");
+                String saveChoice = scanner.nextLine();
+                while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                    System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                    saveChoice = scanner.nextLine();
+                    if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                        break;
+                    }
+                }
                 if (saveChoice.equalsIgnoreCase("y")) {
                     saveToFile(resultAdd.toString());
-                }
-                break;
+                }break;
 
             case 2:
                 System.out.println("Anda memilih: Pengurangan Matriks");
                 System.out.print("Berapa banyak matriks yang ingin dikurangkan? ");
-                int matrixMin = Integer.parseInt(readLine());
+                int matrixMin = scanner.nextInt();
+                scanner.nextLine();
                 if (matrixMin < 2) {
                     System.out.println("Anda harus memasukkan minimal dua matriks.");
                     return;
@@ -67,17 +79,24 @@ public class AritmatikaMatriksMenu {
                     } resultMin.append("\n"); 
                 }
                 System.out.println(resultMin.toString());
-                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n) ");
-                saveChoice = readLine();
+                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n)");
+                saveChoice = scanner.nextLine();
+                while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                    System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                    saveChoice = scanner.nextLine();
+                    if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                        break;
+                    }
+                }
                 if (saveChoice.equalsIgnoreCase("y")) {
                     saveToFile(resultMin.toString());
-                }
-                break;
+                }break;
 
             case 3:
                 System.out.println("Anda memilih: Perkalian Matriks");
                 System.out.print("Berapa banyak matriks yang ingin dikalikan? ");
-                int matrixCountMulti = Integer.parseInt(readLine());
+                int matrixCountMulti = scanner.nextInt();
+                scanner.nextLine();
                 if (matrixCountMulti < 2) {
                     System.out.println("Anda harus memasukkan minimal dua matriks.");
                     return;
@@ -99,12 +118,18 @@ public class AritmatikaMatriksMenu {
                     } resultMulti.append("\n"); 
                 }
                 System.out.print(resultMulti.toString());
-                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n) ");
-                saveChoice = readLine();
+                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n)");
+                saveChoice = scanner.nextLine();
+                while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                    System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                    saveChoice = scanner.nextLine();
+                    if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                        break;
+                    }
+                }
                 if (saveChoice.equalsIgnoreCase("y")) {
                     saveToFile(resultMulti.toString());
-                }
-                break;
+                }break;
 
             default:
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
@@ -113,23 +138,25 @@ public class AritmatikaMatriksMenu {
 
     private static double[][] inputMatrix() {
         System.out.print("Masukkan jumlah baris: ");
-        int rows = Integer.parseInt(readLine());
+        int rows = scanner.nextInt();
         System.out.print("Masukkan jumlah kolom: ");
-        int cols = Integer.parseInt(readLine());
+        int cols = scanner.nextInt();
+        scanner.nextLine();
         double[][] matrix = new double[rows][cols];
         System.out.println("Masukkan elemen matriks:");
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 System.out.print("Matriks[" + (i + 1) + "][" + (j + 1) + "]: ");
-                matrix[i][j] = Double.parseDouble(readLine());
+                matrix[i][j] = scanner.nextDouble();
             }
         }
+        scanner.nextLine(); 
         return matrix;
     }
 
     private static void saveToFile(String results) {
         System.out.print("Masukkan nama file yang akan disimpan (tanpa ekstensi): ");
-        String name = readLine();
+        String name = scanner.nextLine();
         name += ".txt";
         try (FileWriter writer = new FileWriter(name)) {
             writer.write(results);
@@ -137,20 +164,5 @@ public class AritmatikaMatriksMenu {
         } catch (IOException e) {
             System.out.println("Error: Gagal menyimpan ke file");
         }
-    }
-
-    public static String readLine() {
-        StringBuilder input = new StringBuilder();
-        int c;
-        while (true) {
-            try {
-                c = System.in.read();
-                if (c == -1 || c == '\n') break;
-                input.append((char) c);
-            } catch (Exception e) {
-                System.out.println("Error: Terjadi kesalahan saat membaca input.");
-                return "";
-            }
-        } return input.toString().trim();
     }
 }
