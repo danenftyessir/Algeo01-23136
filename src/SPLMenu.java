@@ -17,6 +17,7 @@ public class SPLMenu {
         System.out.println("Anda memilih metode " + subChoice);
         while (subChoice < 1 || subChoice > 4) {
             System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+            System.out.print("Pilih metode (1-4): ");
             subChoice = IntroCalculator.getMenuChoice();
         }
         switch (subChoice) {

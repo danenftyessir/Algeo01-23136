@@ -15,6 +15,7 @@ public class InverseMenu {
         System.out.println("Anda memilih metode " + subChoice);
         while (subChoice < 1 || subChoice > 2) {
             System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+            System.out.print("Pilih metode (1-2): ");
             subChoice = IntroCalculator.getMenuChoice();
         }
         switch (subChoice) {

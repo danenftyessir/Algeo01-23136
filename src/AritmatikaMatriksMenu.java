@@ -1,7 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class AritmatikaMatriksMenu {
     public static void displayAritmatikaMatriksMenu() {
         System.out.println("\n╔═══════════════════════════════════════════════╗");
