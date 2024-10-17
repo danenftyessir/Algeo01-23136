@@ -89,7 +89,7 @@ public class IntroCalculator {
                 break;
             case 8:
                 System.out.println("Anda memilih: Aritmatika Matriks");
-                // Panggil metode yang sesuai
+                AritmatikaMatriksMenu.displayAritmatikaMatriksMenu();
                 break;
             case 9:
                 System.out.println("~~ Terima kasih telah menggunakan Matriks Reeves. Sampai jumpa! ~~");
