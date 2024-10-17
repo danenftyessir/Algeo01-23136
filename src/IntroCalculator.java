@@ -38,6 +38,7 @@ public class IntroCalculator {
                 validInput = true;
             } else {
                 System.out.println("Input tidak valid. Masukkan angka antara 1-9.");
+                System.out.print("Pilih menu (1-9): ");
             }
             clearInputBuffer();
         }
