@@ -76,7 +76,8 @@ public class IntroCalculator {
                 break;
             case 5:
                 System.out.println("Anda memilih: Interpolasi Bicubic Spline");
-                BicubicSplineInterpolation.performBicubicSplineInterpolation();
+                BicubicSplineInterpolation bicubicSplineInterpolation = new BicubicSplineInterpolation();
+                bicubicSplineInterpolation.performBicubicSplineInterpolation();
                 break;
             case 6:
                 System.out.println("Anda memilih: Regresi linier dan kuadratik berganda");
@@ -99,7 +100,7 @@ public class IntroCalculator {
         if (choice != 9) {
             System.out.println("\nTekan Enter untuk kembali ke menu utama!");
             try {
-                reader.readLine(); // Menunggu user menekan Enter
+                reader.readLine(); // Menunggu pengguna menekan Enter
             } catch (IOException e) {
                 System.out.println("Terjadi kesalahan input/output: " + e.getMessage());
                 System.exit(1);
