@@ -22,9 +22,10 @@ public class IntroCalculator {
         System.out.println("║  5. Interpolasi Bicubic Spline                ║");
         System.out.println("║  6. Regresi linier dan kuadratik berganda     ║");
         System.out.println("║  7. Interpolasi Gambar (Bonus)                ║");
-        System.out.println("║  8. Keluar                                    ║");
+        System.out.println("║  8. Aritmatika Matriks                        ║");
+        System.out.println("║  9. Keluar                                    ║");
         System.out.println("╚═══════════════════════════════════════════════╝");
-        System.out.print("Pilih menu (1-8): ");
+        System.out.print("Pilih menu (1-9): ");
     }
 
     public static int getMenuChoice() {
@@ -89,6 +90,9 @@ public class IntroCalculator {
                 System.out.println("Anda memilih: Interpolasi Gambar (Bonus)");
                 break;
             case 8:
+                System.out.println("Anda memilih: Aritmatika Matriks");
+                break;
+            case 9:
                 System.out.println("Terima kasih telah menggunakan kalkulator kami. Sampai jumpa!");
                 break;
             default:
