@@ -68,18 +68,19 @@ public class IntroCalculator {
                 break;
             case 2:
                 System.out.println("Anda memilih: Determinan");
-                determinantMenu();
+                DeterminantMenu.displayDeterminantMenu();
                 break;
             case 3:
                 System.out.println("Anda memilih: Matriks balikan");
                 InverseMenu.displayInverseMenu();
                 break;
             case 4:
-                System.out.println("Anda memilih: Interpolasi Polinomial");
+                System.out.println("Anda memilih: Interpolasi Polinom");
                 PolynomialInterpolationMenu.displayPolynomialInterpolationMenu();
                 break;
             case 5:
                 System.out.println("Anda memilih: Interpolasi Bicubic Spline");
+                BicubicSplineInterpolation.performBicubicSplineInterpolation();
                 break;
             case 6:
                 System.out.println("Anda memilih: Regresi linier dan kuadratik berganda");
@@ -98,13 +99,4 @@ public class IntroCalculator {
             clearInputBuffer();
         }
     }
-
-    private static void determinantMenu() {
-        MatrixInputSystem matrixInputSystem = new MatrixInputSystem();
-        matrixInputSystem.inputMatrix();
-        double[][] matrix_det = matrixInputSystem.getMatrix();
-        double determinant = DeterminantCalculator.calculateDeterminant(matrix_det);
-        System.out.printf("Determinan matriks adalah %.2f\n", determinant);
-    }
 }
-
