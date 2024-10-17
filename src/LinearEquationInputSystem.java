@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class LinearEquationInputSystem {
     private int numEquations;
     private int numVariables;
@@ -25,16 +29,37 @@ public class LinearEquationInputSystem {
     // Fungsi untuk input persamaan linear
     public void inputLinearEquations() {
         System.out.println("=== Sistem Input Persamaan Linear ===");
+        System.out.println("Pilih metode input: ");
+        System.out.println("1. Input dari keyboard");
+        System.out.println("2. Input dari file");
+
+        int choice = readInt("Masukkan pilihan (1/2): ", 1, 2);
+        
+        if (choice == 1) {
+            inputFromKeyboard();
+        } else if (choice == 2) {
+            inputFromFile();
+        }
+        
+        if (coefficients != null) {
+            displayEquations();
+        }
+    }
+
+    // Fungsi untuk input dari keyboard
+    private void inputFromKeyboard() {
         this.numEquations = readInt("\nMasukkan jumlah persamaan (1-4): ", 1, 4);
         this.numVariables = readInt("Masukkan jumlah variabel (1-4): ", 1, 4);
-        // Validasi bahwa numEquations dan numVariables berjumlah sama, kalau tidak, break
+        
+        // Validasi bahwa numEquations dan numVariables berjumlah sama
         if (this.numEquations != this.numVariables) {
+            System.out.println("Error: Jumlah persamaan harus sama dengan jumlah variabel.");
             return;
         }
+        
         this.coefficients = new double[getNumEquations()][getNumVariables() + 1];
 
         System.out.println("\nMasukkan koefisien dan konstanta untuk setiap persamaan.");
-        System.out.println("Berikut format untuk " + getNumVariables() + " variabel:");
         printExample(getNumVariables());
 
         for (int i = 0; i < getNumEquations(); i++) {
@@ -44,8 +69,46 @@ public class LinearEquationInputSystem {
             }
             getCoefficients()[i][getNumVariables()] = readDouble("  Konstanta: ");
         }
+    }
 
-        displayEquations();
+    // Fungsi untuk input dari file
+    private void inputFromFile() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Masukkan nama file (misalnya: input.txt): ");
+        String fileName = scanner.nextLine();
+
+
+        try{
+        try {
+            Scanner fileScanner = new Scanner(new File(fileName));
+            int rows = 0;
+            int cols = 0;
+            while (fileScanner.hasNextLine()) {
+                String[] line = fileScanner.nextLine().split(" ");
+                if (rows == 0) {
+                    cols = line.length;
+                }
+                rows++;
+            }
+            this.numEquations = rows;
+            this.numVariables = cols - 1; // Karena kolom terakhir adalah konstanta
+            this.coefficients = new double[numEquations][cols];
+
+            fileScanner = new Scanner(new File(fileName)); // Restart untuk membaca ulang
+            for (int i = 0; i < numEquations; i++) {
+                String[] line = fileScanner.nextLine().split(" ");
+                for (int j = 0; j < cols; j++) {
+                    coefficients[i][j] = Double.parseDouble(line[j]);
+                }
+            }
+            fileScanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: File tidak ditemukan.");
+            scanner.close();
+        }
+    } catch (Exception e) {
+        System.out.println("Error: Terjadi kesalahan saat membaca file.");
+    }
     }
 
     // Fungsi untuk menampilkan persamaan linear yang dimasukkan
@@ -87,11 +150,9 @@ public class LinearEquationInputSystem {
     }
 
     private static double absoluteValue(double number) {
-        if (number < 0) {
-            return 0 - number;
-        }
-        return number;
+        return number < 0 ? -number : number;
     }
+
     private static int readInt(String prompt, int min, int max) {
         while (true) {
             try {
@@ -107,6 +168,7 @@ public class LinearEquationInputSystem {
             }
         }
     }
+
     private static double readDouble(String prompt) {
         while (true) {
             try {
@@ -125,7 +187,7 @@ public class LinearEquationInputSystem {
             try {
                 c = System.in.read();
                 if (c == -1 || c == '\n') break;
-                input.append((char)c);
+                input.append((char) c);
             } catch (Exception e) {
                 System.out.println("Error: Terjadi kesalahan saat membaca input.");
                 return "";

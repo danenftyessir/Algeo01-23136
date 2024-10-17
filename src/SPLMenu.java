@@ -1,3 +1,7 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
+
 public class SPLMenu {
     public static void displaySPLMenu() {
         System.out.println("\n╔═══════════════════════════════════════════════╗");
@@ -33,20 +37,37 @@ public class SPLMenu {
 
                 int rank = GaussElimination.calculateRank(rowEchelonForm);
                 int numVariables = n;
+                StringBuilder results = new StringBuilder();
         
                 if (rank < numVariables) {
                     if (GaussElimination.hasInconsistentSystem(rowEchelonForm, rank)) {
                         System.out.println("\nTidak ada solusi.");
+                        results.append("Tidak ada solusi.\n");
                     } else {
                         System.out.println("\nSistem memiliki solusi banyak (parametrik).");
-                        GaussElimination.printParametricSolution(rowEchelonForm, rank);
+                        results.append("Sistem memiliki solusi banyak (parametrik).\n");
+                        String[] parSolutions = GaussElimination.parametricSolution(rowEchelonForm, rank);
+                        // Cetak solusi parametrik
+                        System.out.println("Solusi parametrik:");
+                        results.append("Solusi parametrik:\n");
+                        for (int i = 0; i < n; i++) {
+                            System.out.printf("x%d = %s\n", i + 1, parSolutions[i]);
+                            results.append(String.format("x%d = %s\n", i + 1, parSolutions[i]));
+                        }
                     }
                 } else {
                     double[] solutions = GaussElimination.backSubstitution(rowEchelonForm);
                     System.out.println("\nHasil SPL:");
+                    results.append("Hasil SPL:\n");
                     for (int i = 0; i < n; i++) {
                         System.out.printf("x%d = %.2f\n", i + 1, solutions[i]);
+                        results.append(String.format("x%d = %.2f\n", i + 1, solutions[i]));
                     }
+                }
+                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n) : ");
+                String saveChoice = readLine();
+                if (saveChoice.equalsIgnoreCase("y")) {
+                    saveToFile(results.toString());
                 }
                 break;
             case 2:
@@ -65,19 +86,36 @@ public class SPLMenu {
 
                 rank = GaussJordanElimination.calculateRank(reducedRowEchelonForm);
                 numVariables = n;
+                results = new StringBuilder();
         
                 if (rank < numVariables) {
                     if (GaussJordanElimination.hasInconsistentSystem(reducedRowEchelonForm, rank)) {
                         System.out.println("\nTidak ada solusi.");
+                        results.append("Tidak ada solusi.\n");
                     } else {
                         System.out.println("\nSistem memiliki solusi banyak (parametrik).");
-                        GaussJordanElimination.printParametricSolution(reducedRowEchelonForm, rank);
+                        results.append("Sistem memiliki solusi banyak (parametrik).\n");
+                        String[] parSolutions = GaussJordanElimination.parametricSolution(reducedRowEchelonForm, rank);
+                        // Cetak solusi parametrik
+                        System.out.println("Solusi parametrik:");
+                        results.append("Solusi parametrik:\n");
+                        for (int i = 0; i < n; i++) {
+                            System.out.printf("x%d = %s\n", i + 1, parSolutions[i]);
+                            results.append(String.format("x%d = %s\n", i + 1, parSolutions[i]));
+                        }
                     }
                 } else {
                     System.out.println("\nHasil SPL:");
+                    results.append("Hasil SPL:\n");
                     for (int i = 0; i < n; i++) {
                         System.out.printf("x%d = %.2f\n", i + 1, reducedRowEchelonForm[i][n]);
+                        results.append(String.format("x%d = %.2f\n", i + 1, reducedRowEchelonForm[i][n]));
                     }
+                }
+                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n) : ");
+                saveChoice = readLine();
+                if (saveChoice.equalsIgnoreCase("y")) {
+                    saveToFile(results.toString());
                 }
                 break;
             case 3:
@@ -99,13 +137,22 @@ public class SPLMenu {
                     constants[i] = augmentedMatrix[i][n];
                 }
                 double[] solution = InverseMatrix.solveLinearEquation(coefficients, constants);
+                results = new StringBuilder();
                 if (solution == null) {
                     System.out.println("\nTidak ada solusi unik (matriks singular).");
+                    results.append("Tidak ada solusi unik (matriks singular).\n");
                 } else {
                     System.out.println("\nSolusi SPL:");
+                    results.append("Solusi SPL:\n");
                     for (int i = 0; i < n; i++) {
                         System.out.printf("x%d = %.2f\n", i + 1, solution[i]);
+                        results.append(String.format("x%d = %.2f\n", i + 1, solution[i]));
                     }
+                }
+                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n) : ");
+                saveChoice = readLine();
+                if (saveChoice.equalsIgnoreCase("y")) {
+                    saveToFile(results.toString());
                 }
                 break;
 
@@ -128,17 +175,53 @@ public class SPLMenu {
                     constants[i] = augmentedMatrix[i][n];
                 }
                 solution = CramerRule.solveUsingCramer(coefficients, constants);
+                results = new StringBuilder();
                 if (solution == null) {
                     System.out.println("\nTidak ada solusi unik (matriks singular).");
+                    results.append("Tidak ada solusi unik (matriks singular).\n");
                 } else {
                     System.out.println("\nSolusi SPL:");
+                    results.append("Solusi SPL:\n");
                     for (int i = 0; i < n; i++) {
                         System.out.printf("x%d = %.2f\n", i + 1, solution[i]);
+                        results.append(String.format("x%d = %.2f\n", i + 1, solution[i]));
                     }
+                }
+                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n) : ");
+                saveChoice = readLine();
+                if (saveChoice.equalsIgnoreCase("y")) {
+                    saveToFile(results.toString());
                 }
                 break;
             default:
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
         }
+    }
+    private static void saveToFile(String results) {
+        System.out.print("Masukkan nama file yang akan disimpan (tanpa ekstensi): ");
+        String name = readLine();
+        name += ".txt";
+        try (FileWriter writer = new FileWriter(name)) {
+            writer.write(results);
+            System.out.printf("Berhasil disimpan ke file %s\n",name);
+        } catch (IOException e) {
+            System.out.println("Error: Gagal menyimpan ke file");
+        }
+    }
+
+    public static String readLine() {
+        StringBuilder input = new StringBuilder();
+        int c;
+        while (true) {
+            try {
+                c = System.in.read();
+                if (c == -1 || c == '\n') break;
+                input.append((char) c);
+            } catch (Exception e) {
+                System.out.println("Error: Terjadi kesalahan saat membaca input.");
+                return "";
+            }
+        }
+        return input.toString().trim();
     }
 }

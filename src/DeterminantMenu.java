@@ -22,6 +22,7 @@ public class DeterminantMenu {
                 matrix = DeterminantCalculator.readMatrixFromFile(filename);
             } else {
                 System.out.println("Pilihan tidak valid. Kembali ke menu utama.");
+                scanner.close();
                 return;
             }
 

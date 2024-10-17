@@ -131,7 +131,7 @@ public class GaussElimination {
         return false;
     }
 
-    public static void printParametricSolution(double[][] matrix, int rank) {
+    public static String[] parametricSolution(double[][] matrix, int rank) {
         int n = matrix.length;
         String[] solutions = new String[n];
         boolean[] isFreeVariable = new boolean[n];  // Untuk menandai variabel bebas
@@ -158,12 +158,8 @@ public class GaussElimination {
         for (int i = rank; i < n; i++) {
             solutions[i] = "p" + (i + 1);
         }
-    
-        // Cetak solusi parametrik
-        System.out.println("Solusi parametrik:");
-        for (int i = 0; i < n; i++) {
-            System.out.printf("x%d = %s\n", i + 1, solutions[i]);
-        }
+        
+        return solutions;
     }
     
 

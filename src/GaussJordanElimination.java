@@ -122,7 +122,7 @@ public class GaussJordanElimination {
         return false;
     }
 
-    public static void printParametricSolution(double[][] matrix, int rank) {
+    public static String[] parametricSolution(double[][] matrix, int rank) {
         int n = matrix[0].length - 1;  // Jumlah variabel (kolom matriks - 1 karena ada konstanta di kolom terakhir)
         String[] solutions = new String[n];
         boolean[] isFreeVariable = new boolean[n];  // Untuk menandai variabel bebas
@@ -155,11 +155,7 @@ public class GaussJordanElimination {
             solutions[i] = "p" + (i + 1);
         }
     
-        // Cetak solusi parametrik
-        System.out.println("Solusi parametrik:");
-        for (int i = 0; i < n; i++) {
-            System.out.printf("x%d = %s\n", i + 1, solutions[i]);
-        }
+        return solutions;
     }
     
     
