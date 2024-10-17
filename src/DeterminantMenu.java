@@ -25,11 +25,13 @@ public class DeterminantMenu {
                 scanner.close();
                 return;
             }
-
-            System.out.println("\nPilih metode penghitungan determinan:");
-            System.out.println("1. Ekspansi Kofaktor");
-            System.out.println("2. Reduksi Baris (OBE)");
-            System.out.print("Pilihan Anda: ");
+            System.out.println("\n╔═══════════════════════════════════════════════╗");
+            System.out.println("║         Metode Perhitungan Determinan         ║");
+            System.out.println("╠═══════════════════════════════════════════════╣");
+            System.out.println("║  1. Ekspansi Kofator                          ║");
+            System.out.println("║  2. Reduksi Baris (OBE)                       ║");
+            System.out.println("╚═══════════════════════════════════════════════╝");
+            System.out.print("Pilih metode (1-2): ");
             String methodChoice = scanner.nextLine();
 
             String method;
@@ -49,8 +51,15 @@ public class DeterminantMenu {
             System.out.println("\nDeterminan matriks adalah: " + determinant);
 
             // Opsi menyimpan hasil
-            System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
+            System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
             String saveChoice = scanner.nextLine();
+            while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                saveChoice = scanner.nextLine();
+                if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                    break;
+                }
+            }
             if (saveChoice.equalsIgnoreCase("y")) {
                 System.out.print("Masukkan nama file untuk menyimpan hasil: ");
                 String outputFilename = scanner.nextLine();
