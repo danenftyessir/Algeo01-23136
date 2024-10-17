@@ -1,9 +1,29 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class MatrixInputSystem {
     private double[][] matrix_det;
     public double[][] getMatrix() {
         return this.matrix_det;
     }
     public void inputMatrix() {
+        System.out.println("=== Sistem Input Matriks Balikan ===");
+        System.out.println("Pilih metode input: ");
+        System.out.println("1. Input dari keyboard");
+        System.out.println("2. Input dari file");
+        System.out.print("Masukkan pilihan (1/2): ");
+        int choice = readInt();
+        
+        if (choice == 1) {
+            inputFromKeyboard();
+        } else if (choice == 2) {
+            inputFromFile();
+        }
+        
+    }
+
+    public void inputFromKeyboard() {
         System.out.print("Masukkan jumlah baris: ");
         int rows = readInt();
         System.out.print("Masukkan jumlah kolom: ");
@@ -24,6 +44,43 @@ public class MatrixInputSystem {
             System.out.println();
         }
 
+    }
+
+    private void inputFromFile() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Masukkan nama file (misalnya: input.txt): ");
+        String fileName = scanner.nextLine();
+
+
+        try {
+            try {
+                Scanner fileScanner = new Scanner(new File(fileName));
+                int rows = 0;
+                int cols = 0;
+                while (fileScanner.hasNextLine()) {
+                    String[] line = fileScanner.nextLine().split(" ");
+                    if (rows == 0) {
+                        cols = line.length;
+                    }
+                    rows++;
+                }
+                this.matrix_det = new double[rows][cols];
+
+                fileScanner = new Scanner(new File(fileName)); // Restart untuk membaca ulang
+                for (int i = 0; i < rows; i++) {
+                    String[] line = fileScanner.nextLine().split(" ");
+                    for (int j = 0; j < cols; j++) {
+                        this.matrix_det[i][j] = Double.parseDouble(line[j]);
+                    }
+                }
+                fileScanner.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("Error: File tidak ditemukan.");
+                scanner.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Error: Terjadi kesalahan saat membaca file.");
+        }
     }
 
     private static int readInt() {
