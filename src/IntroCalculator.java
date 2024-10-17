@@ -7,7 +7,7 @@ public class IntroCalculator {
             displayMainMenu();
             choice = getMenuChoice();
             processMainMenuChoice(choice);
-        } while (choice != 8);
+        } while (choice != 9);
     }
 
     private static void displayMainMenu() {
@@ -33,11 +33,11 @@ public class IntroCalculator {
         boolean validInput = false;
         while (!validInput) {
             int input = readSingleChar();
-            if (input >= '1' && input <= '8') {
+            if (input >= '1' && input <= '9') {
                 choice = input - '0';
                 validInput = true;
             } else {
-                System.out.println("Input tidak valid. Masukkan angka antara 1-8.");
+                System.out.println("Input tidak valid. Masukkan angka antara 1-9.");
             }
             clearInputBuffer();
         }
@@ -98,7 +98,7 @@ public class IntroCalculator {
             default:
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
         }
-        if (choice != 8) {
+        if (choice != 9) {
             System.out.println("\nTekan Enter untuk kembali ke menu utama...");
             clearInputBuffer();
         }
