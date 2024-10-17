@@ -1,4 +1,6 @@
-// Class Utama
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class IntroCalculator {
     public static void main(String[] args) {
@@ -7,7 +9,7 @@ public class IntroCalculator {
             displayMainMenu();
             choice = getMenuChoice();
             processMainMenuChoice(choice);
-        } while (choice != 8);
+        } while (choice != 9);
     }
 
     private static void displayMainMenu() {
@@ -31,37 +33,30 @@ public class IntroCalculator {
     public static int getMenuChoice() {
         int choice = 0;
         boolean validInput = false;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (!validInput) {
-            int input = readSingleChar();
-            if (input >= '1' && input <= '8') {
-                choice = input - '0';
-                validInput = true;
-            } else {
-                System.out.println("Input tidak valid. Masukkan angka antara 1-8.");
+            try {
+                String input = reader.readLine().trim();
+                choice = Integer.parseInt(input);
+                if (choice >= 1 && choice <= 9) {
+                    validInput = true;
+                } else {
+                    System.out.println("Input tidak valid. Masukkan angka antara 1-9.");
+                    System.out.print("Pilih menu (1-9): ");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Input tidak valid. Masukkan angka antara 1-9.");
+                System.out.print("Pilih menu (1-9): ");
+            } catch (IOException e) {
+                System.out.println("Terjadi kesalahan input/output: " + e.getMessage());
+                System.exit(1);
             }
-            clearInputBuffer();
         }
         return choice;
     }
 
-    private static int readSingleChar() {
-        int input = 0;
-        try {
-            input = System.in.read();
-        } catch (java.io.IOException e) {
-            return -1;
-        }
-        return input;
-    }
-    private static void clearInputBuffer() {
-        try {
-            while (System.in.available() > 0) {
-                System.in.read();
-            }
-        } catch (java.io.IOException e) {
-        }
-    }
     private static void processMainMenuChoice(int choice) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         switch (choice) {
             case 1:
                 System.out.println("Anda memilih: Sistem Persamaan Linier");
@@ -81,26 +76,35 @@ public class IntroCalculator {
                 break;
             case 5:
                 System.out.println("Anda memilih: Interpolasi Bicubic Spline");
-                // BicubicSplineInterpolation.performBicubicSplineInterpolation();
+                BicubicSplineInterpolation bicubicSplineInterpolation = new BicubicSplineInterpolation();
+                bicubicSplineInterpolation.performBicubicSplineInterpolation();
                 break;
             case 6:
                 System.out.println("Anda memilih: Regresi linier dan kuadratik berganda");
+                // Panggil metode yang sesuai
                 break;
             case 7:
                 System.out.println("Anda memilih: Interpolasi Gambar (Bonus)");
+                // Panggil metode yang sesuai
                 break;
             case 8:
                 System.out.println("Anda memilih: Aritmatika Matriks");
+                // Panggil metode yang sesuai
                 break;
             case 9:
-                System.out.println("Terima kasih telah menggunakan kalkulator kami. Sampai jumpa!");
+                System.out.println("~~ Terima kasih telah menggunakan Matriks Reeves. Sampai jumpa! ~~");
                 break;
             default:
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
         }
-        if (choice != 8) {
-            System.out.println("\nTekan Enter untuk kembali ke menu utama...");
-            clearInputBuffer();
+        if (choice != 9) {
+            System.out.println("\nTekan Enter untuk kembali ke menu utama!");
+            try {
+                reader.readLine(); // Menunggu pengguna menekan Enter
+            } catch (IOException e) {
+                System.out.println("Terjadi kesalahan input/output: " + e.getMessage());
+                System.exit(1);
+            }
         }
     }
 }
