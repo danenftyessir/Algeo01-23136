@@ -1,8 +1,10 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class InverseMenu {
     // Fungsi untuk menampilkan menu matriks balikan di IntroCalculator (Main Class)
+    private static Scanner scanner = new Scanner(System.in);
     public static void displayInverseMenu() {
         System.out.println("\n╔═══════════════════════════════════════════════╗");
         System.out.println("║               MATRIKS BALIKAN                 ║");
@@ -11,13 +13,16 @@ public class InverseMenu {
         System.out.println("║  2. Metode Kofaktor-Adjoin                    ║");
         System.out.println("╚═══════════════════════════════════════════════╝");
         System.out.print("Pilih metode (1-2): ");
-        int subChoice = IntroCalculator.getMenuChoice();
+        int subChoice = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Anda memilih metode " + subChoice);
         while (subChoice < 1 || subChoice > 2) {
             System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             System.out.print("Pilih metode (1-2): ");
-            subChoice = IntroCalculator.getMenuChoice();
+            subChoice = scanner.nextInt();
+            scanner.nextLine();
         }
+
         switch (subChoice) {
             case 1:
                 System.out.println("Anda memilih: Metode eliminasi Gauss-Jordan");
@@ -41,12 +46,19 @@ public class InverseMenu {
                         results.append("\n");
                     }
                 }
-                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n) ");
+                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
                 String saveChoice = readLine();
+                while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                    System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                    saveChoice = readLine();
+                    if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                        break;
+                    }
+                }
                 if (saveChoice.equalsIgnoreCase("y")) {
                     saveToFile(results.toString());
-                }
-                break;
+                } break;
+                
             case 2:
                 System.out.println("Anda memilih: Metode Kofaktor-Adjoin");
                 matrixInputSystem = new MatrixInputSystem();
@@ -69,12 +81,18 @@ public class InverseMenu {
                         results.append("\n");
                     }
                 }
-                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n) ");
+                System.out.println("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
                 saveChoice = readLine();
+                while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                    System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                    saveChoice = readLine();
+                    if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                        break;
+                    }
+                }
                 if (saveChoice.equalsIgnoreCase("y")) {
                     saveToFile(results.toString());
-                }
-                break;
+                } break;
             default:
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
         }
