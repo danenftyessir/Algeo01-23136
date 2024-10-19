@@ -1,8 +1,9 @@
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.util.Scanner;
 
 public class SPLMenu {
+    private static Scanner scanner = new Scanner(System.in);
     public static void displaySPLMenu() {
         System.out.println("\n╔═══════════════════════════════════════════════╗");
         System.out.println("║         SISTEM PERSAMAAN LINIER               ║");
@@ -13,12 +14,14 @@ public class SPLMenu {
         System.out.println("║  4. Kaidah Cramer                             ║");
         System.out.println("╚═══════════════════════════════════════════════╝");
         System.out.print("Pilih metode (1-4): ");
-        int subChoice = IntroCalculator.getMenuChoice();
+        int subChoice = scanner.nextInt();
+        scanner.nextLine();
         System.out.println("Anda memilih metode " + subChoice);
         while (subChoice < 1 || subChoice > 4) {
             System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             System.out.print("Pilih metode (1-4): ");
-            subChoice = IntroCalculator.getMenuChoice();
+            subChoice = scanner.nextInt();
+            scanner.nextLine();
         }
         switch (subChoice) {
             case 1:
@@ -65,8 +68,15 @@ public class SPLMenu {
                         results.append(String.format("x%d = %.2f\n", i + 1, solutions[i]));
                     }
                 }
-                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n) : ");
+                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
                 String saveChoice = readLine();
+                while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                    System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                    saveChoice = readLine();
+                    if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                        break;
+                    }
+                }
                 if (saveChoice.equalsIgnoreCase("y")) {
                     saveToFile(results.toString());
                 }
@@ -113,11 +123,18 @@ public class SPLMenu {
                         results.append(String.format("x%d = %.2f\n", i + 1, reducedRowEchelonForm[i][n]));
                     }
                 }
-                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n) : ");
+                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
                 saveChoice = readLine();
+                while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                    System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                    saveChoice = readLine();
+                    if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                        break;
+                    }
+                }
                 if (saveChoice.equalsIgnoreCase("y")) {
                     saveToFile(results.toString());
-                }
+                }                
                 break;
             case 3:
                 System.out.println("Anda memilih: Matriks balikan");
@@ -150,11 +167,18 @@ public class SPLMenu {
                         results.append(String.format("x%d = %.2f\n", i + 1, solution[i]));
                     }
                 }
-                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n) : ");
+                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
                 saveChoice = readLine();
+                while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                    System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                    saveChoice = readLine();
+                    if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                        break;
+                    }
+                }
                 if (saveChoice.equalsIgnoreCase("y")) {
                     saveToFile(results.toString());
-                }
+                }                
                 break;
 
             case 4:
@@ -188,11 +212,18 @@ public class SPLMenu {
                         results.append(String.format("x%d = %.2f\n", i + 1, solution[i]));
                     }
                 }
-                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n) : ");
+                System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
                 saveChoice = readLine();
+                while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+                    System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+                    saveChoice = readLine();
+                    if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                        break;
+                    }
+                }
                 if (saveChoice.equalsIgnoreCase("y")) {
                     saveToFile(results.toString());
-                }
+                }                
                 break;
             default:
                 System.out.println("Pilihan tidak valid. Silakan coba lagi.");
