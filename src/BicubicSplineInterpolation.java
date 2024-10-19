@@ -1,6 +1,6 @@
-import java.util.Scanner;
-import java.io.PrintWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class BicubicSplineInterpolation {
     private static final int MATRIX_SIZE = 4;
@@ -80,19 +80,26 @@ public class BicubicSplineInterpolation {
         double result = evaluatePolynomial();
         
         System.out.println("\n╔══════════════════════════════════════╗");
-        System.out.println("║    HASIL BICUBIC SPLINE INTERPOLATION ║");
+        System.out.println("║  HASIL BICUBIC SPLINE INTERPOLATION  ║");
         System.out.println("╠══════════════════════════════════════╣");
         System.out.println("║ f(x,y) = " + padRight(polynomialString, 28) + "║");
         System.out.println("║ f(" + formatDouble(this.a) + ", " + 
                            formatDouble(this.b) + ") = " + 
-                           padRight(formatDouble(result), 18) + "║");
+                           padRight(formatDouble(result), 27)             + "║");
         System.out.println("╚══════════════════════════════════════╝");
 
         System.out.print("\nApakah Anda ingin menyimpan hasil ke file? (y/n): ");
         String saveChoice = scanner.next();
+        while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+            System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+            saveChoice = scanner.next();
+            if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                break;
+            }
+        }
         if (saveChoice.equalsIgnoreCase("y")) {
             saveOutputToFile(polynomialString, result);
-        }
+        }        
     }
 
     private void inputAB() {
