@@ -1,9 +1,9 @@
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PolynomialInterpolationMenu {
     // Fungsi untuk menampilkan menu interpolasi polinom di IntroCalculator (Main Class)
@@ -39,9 +39,16 @@ public class PolynomialInterpolationMenu {
 
         System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
         String saveChoice = scanner.next();
+        while (!saveChoice.equals("y") && !saveChoice.equals("n")) {
+            System.out.println("Pilihan tidak valid, harap masukkan (y/n)!");
+            saveChoice = scanner.next();
+            if (saveChoice.equals("y") || saveChoice.equals("n")) {
+                break;
+            }
+        }
         if (saveChoice.equalsIgnoreCase("y")) {
             saveToFile(output, scanner);
-        }
+        }        
     }
     // Fungsi untuk input data dari keyboard atau file
     private static double[][] inputData(Scanner scanner) {
