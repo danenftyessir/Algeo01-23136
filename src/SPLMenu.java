@@ -30,10 +30,6 @@ public class SPLMenu {
                 inputSystem.inputLinearEquations();
                 double[][] augmentedMatrix = inputSystem.getCoefficients();
                 int n = inputSystem.getNumVariables();
-                if (inputSystem.getNumEquations() != n) {
-                    System.out.println("Jumlah persamaan dan variabel tidak sama. Silakan coba lagi.");
-                    break;
-                }
 
                 double[][] rowEchelonForm = GaussElimination.gaussElimination(augmentedMatrix);
                 System.out.println("\nMatriks setelah eliminasi Gauss:");
@@ -87,10 +83,6 @@ public class SPLMenu {
                 inputSystem.inputLinearEquations();
                 augmentedMatrix = inputSystem.getCoefficients();
                 n = inputSystem.getNumVariables();
-                if (inputSystem.getNumEquations() != n) {
-                    System.out.println("Jumlah persamaan dan variabel tidak sama. Silakan coba lagi.");
-                    break;
-                }
                 double[][] reducedRowEchelonForm = GaussJordanElimination.gaussJordanElimination(augmentedMatrix);
                 System.out.println("\nMatriks setelah eliminasi Gauss-Jordan:");
                 GaussElimination.printMatrix(reducedRowEchelonForm);

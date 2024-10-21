@@ -48,16 +48,16 @@ public class LinearEquationInputSystem {
 
     // Fungsi untuk input dari keyboard
     private void inputFromKeyboard() {
-        this.numEquations = readInt("\nMasukkan jumlah persamaan (1-4): ", 1, 4);
-        this.numVariables = readInt("Masukkan jumlah variabel (1-4): ", 1, 4);
+        this.numEquations = readInt("\nMasukkan jumlah persamaan (1-5): ", 1, 5);
+        this.numVariables = readInt("Masukkan jumlah variabel (1-5): ", 1, 5);
         
         // Validasi bahwa numEquations dan numVariables berjumlah sama
-        if (this.numEquations != this.numVariables) {
-            System.out.println("Error: Jumlah persamaan harus sama dengan jumlah variabel.");
+        if (this.numEquations > this.numVariables) {
+            System.out.println("Error: Jumlah persamaan harus kurang dari atau sama dengan jumlah variabel.");
             return;
         }
         
-        this.coefficients = new double[getNumEquations()][getNumVariables() + 1];
+        this.coefficients = new double[getNumVariables()][getNumVariables() + 1];
 
         System.out.println("\nMasukkan koefisien dan konstanta untuk setiap persamaan.");
         printExample(getNumVariables());
@@ -68,6 +68,12 @@ public class LinearEquationInputSystem {
                 getCoefficients()[i][j] = readDouble("  Koefisien X" + (j + 1) + ": ");
             }
             getCoefficients()[i][getNumVariables()] = readDouble("  Konstanta: ");
+        }
+        for (int i = getNumEquations(); i < getNumVariables(); i++) {
+            System.out.println("\nPersamaan " + (i + 1) + ":");
+            for (int j = 0; j < getNumVariables(); j++) {
+                getCoefficients()[i][j] = 0;
+            }
         }
     }
 
