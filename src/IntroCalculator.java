@@ -1,6 +1,6 @@
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class IntroCalculator {
     public static void main(String[] args) {
@@ -81,7 +81,7 @@ public class IntroCalculator {
                 break;
             case 6:
                 System.out.println("Anda memilih: Regresi linier dan kuadratik berganda");
-                // Panggil metode yang sesuai
+                RegresiMenu.displayRegresiMenu();
                 break;
             case 7:
                 System.out.println("Anda memilih: Interpolasi Gambar (Bonus)");
