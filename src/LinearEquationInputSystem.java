@@ -98,13 +98,18 @@ public class LinearEquationInputSystem {
             }
             this.numEquations = rows;
             this.numVariables = cols - 1; // Karena kolom terakhir adalah konstanta
-            this.coefficients = new double[numEquations][cols];
+            this.coefficients = new double[numVariables][cols];
 
             fileScanner = new Scanner(new File(fileName)); // Restart untuk membaca ulang
             for (int i = 0; i < numEquations; i++) {
                 String[] line = fileScanner.nextLine().split(" ");
                 for (int j = 0; j < cols; j++) {
                     coefficients[i][j] = Double.parseDouble(line[j]);
+                }
+            }
+            for (int i = numEquations; i < numVariables; i++) {
+                for (int j = 0; j < cols; j++) {
+                    coefficients[i][j] = 0;
                 }
             }
             fileScanner.close();
