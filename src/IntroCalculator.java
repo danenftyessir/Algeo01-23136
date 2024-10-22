@@ -84,8 +84,9 @@ public class IntroCalculator {
                 RegresiMenu.displayRegresiMenu();
                 break;
             case 7:
-                System.out.println("Anda memilih: Interpolasi Gambar (Bonus)");
-                // Panggil metode yang sesuai
+                System.out.println("Anda memilih: Interpolasi Gambar");
+                ImageInterpolator imageInterpolator = new ImageInterpolator();
+                imageInterpolator.performImageInterpolation();
                 break;
             case 8:
                 System.out.println("Anda memilih: Aritmatika Matriks");
