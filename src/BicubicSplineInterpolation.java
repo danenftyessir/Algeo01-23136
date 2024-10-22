@@ -12,6 +12,7 @@ public class BicubicSplineInterpolation {
     private double b;
     private Scanner scanner;
 
+    // Konstruktor
     public BicubicSplineInterpolation() {
         this.inputMatrix = new double[MATRIX_SIZE][MATRIX_SIZE];
         this.coefficients = new double[COEFFICIENTS_COUNT];
@@ -33,7 +34,7 @@ public class BicubicSplineInterpolation {
         while (i < size) {
             int j = 0;
             while (j < size) {
-                System.out.print("Elemen [" + (i+1) + "][" + (j+1) + "]: ");
+                System.out.print("Elemen [" + (i + 1) + "][" + (j + 1) + "]: ");
                 matrix[i][j] = getValidDoubleInput();
                 j = j + 1;
             }
@@ -57,6 +58,7 @@ public class BicubicSplineInterpolation {
         }
     }
 
+    // Menentukan tipe interpolasi berdasarkan ukuran matriks
     private String determineInterpolationType(int size) {
         if (size == 2) {
             return "Bilinear";
@@ -69,6 +71,7 @@ public class BicubicSplineInterpolation {
         }
     }
 
+    // Melakukan interpolasi bicubic spline
     public void performBicubicSplineInterpolation() {
         if (this.inputMatrix == null) {
             System.out.println("Error: Input matrix belum diinisialisasi.");
@@ -78,14 +81,14 @@ public class BicubicSplineInterpolation {
         calculateCoefficients();
         String polynomialString = getPolynomialString();
         double result = evaluatePolynomial();
-        
+
         System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║  HASIL BICUBIC SPLINE INTERPOLATION  ║");
         System.out.println("╠══════════════════════════════════════╣");
         System.out.println("║ f(x,y) = " + padRight(polynomialString, 28) + "║");
-        System.out.println("║ f(" + formatDouble(this.a) + ", " + 
-                           formatDouble(this.b) + ") = " + 
-                           padRight(formatDouble(result), 27)             + "║");
+        System.out.println("║ f(" + formatDouble(this.a) + ", " +
+                formatDouble(this.b) + ") = " +
+                padRight(formatDouble(result), 27) + "║");
         System.out.println("╚══════════════════════════════════════╝");
 
         System.out.print("\nApakah Anda ingin menyimpan hasil ke file? (y/n): ");
@@ -99,14 +102,16 @@ public class BicubicSplineInterpolation {
         }
         if (saveChoice.equalsIgnoreCase("y")) {
             saveOutputToFile(polynomialString, result);
-        }        
+        }
     }
 
+    // Meminta input nilai a dan b sebagai titik interpolasi
     private void inputAB() {
         this.a = getValidInput("Masukkan nilai a (0 <= a <= 1): ", 0, 1);
         this.b = getValidInput("Masukkan nilai b (0 <= b <= 1): ", 0, 1);
     }
 
+    // Mendapatkan input angka double yang valid
     private double getValidInput(String prompt, double min, double max) {
         double input;
         do {
@@ -123,12 +128,14 @@ public class BicubicSplineInterpolation {
         return input;
     }
 
-    private void calculateCoefficients() {
+    // Menghitung koefisien polinomial interpolasi
+    public void calculateCoefficients() {
         double[][] X = buildXMatrix();
         double[] y = flattenMatrix();
         this.coefficients = solveLinearSystem(X, y);
     }
 
+    // Membangun matriks X untuk sistem persamaan linier
     private double[][] buildXMatrix() {
         double[][] X = new double[COEFFICIENTS_COUNT][COEFFICIENTS_COUNT];
         int i = 0;
@@ -147,6 +154,7 @@ public class BicubicSplineInterpolation {
         return X;
     }
 
+    // Mengubah matriks input menjadi array 1 dimensi
     private double[] flattenMatrix() {
         double[] flattened = new double[COEFFICIENTS_COUNT];
         int i = 0;
@@ -161,6 +169,7 @@ public class BicubicSplineInterpolation {
         return flattened;
     }
 
+    // Menyelesaikan sistem persamaan linier menggunakan metode eliminasi Gauss
     private double[] solveLinearSystem(double[][] A, double[] b) {
         int n = b.length;
         int p = 0;
@@ -210,6 +219,7 @@ public class BicubicSplineInterpolation {
         return x;
     }
 
+    // Menghitung nilai dari x^exponent
     private static double powerFunction(double base, int exponent) {
         double result = 1;
         int i = 0;
@@ -220,6 +230,7 @@ public class BicubicSplineInterpolation {
         return result;
     }
 
+    // Menghitung nilai absolut dari angka double
     private static double abs(double x) {
         if (x < 0) {
             return -x;
@@ -227,6 +238,7 @@ public class BicubicSplineInterpolation {
         return x;
     }
 
+    // Mendapatkan string persamaan polinomial
     private String getPolynomialString() {
         StringBuilder sb = new StringBuilder();
         boolean isFirst = true;
@@ -264,7 +276,8 @@ public class BicubicSplineInterpolation {
         return sb.toString();
     }
 
-    private double evaluatePolynomial() {
+    // Menghitung nilai fungsi interpolasi
+    public double evaluatePolynomial() {
         double result = 0;
         int i = 0;
         while (i < COEFFICIENTS_COUNT) {
@@ -277,6 +290,7 @@ public class BicubicSplineInterpolation {
         return result;
     }
 
+    // Menyimpan output ke file
     private void saveOutputToFile(String polynomialString, double result) {
         System.out.print("Masukkan nama file untuk menyimpan hasil (tanpa ekstensi .txt): ");
         String fileName = scanner.next();
@@ -285,20 +299,22 @@ public class BicubicSplineInterpolation {
             fileName = fileName + ".txt";
         }
 
+        // Menyimpan output ke file
         try (PrintWriter writer = new PrintWriter(fileName)) {
             writer.println("Persamaan Polinomial Interpolasi:");
             writer.println("f(x,y) = " + polynomialString);
             writer.println();
             writer.println("Taksiran nilai fungsi:");
-            writer.println("f(" + formatDouble(this.a) + ", " + 
-                           formatDouble(this.b) + ") = " + 
-                           formatDouble(result));
+            writer.println("f(" + formatDouble(this.a) + ", " +
+                    formatDouble(this.b) + ") = " +
+                    formatDouble(result));
             System.out.println("Output berhasil disimpan ke file '" + fileName + "'");
         } catch (IOException e) {
             System.out.println("Error saat menyimpan output ke file: " + e.getMessage());
         }
     }
 
+    // Mendapatkan input angka integer yang valid
     private int getValidIntInput(int min, int max) {
         int input;
         while (true) {
@@ -315,6 +331,7 @@ public class BicubicSplineInterpolation {
         }
     }
 
+    // Mendapatkan input angka double yang valid
     private double getValidDoubleInput() {
         while (true) {
             try {
@@ -325,6 +342,7 @@ public class BicubicSplineInterpolation {
         }
     }
 
+    // Format angka double menjadi string dengan 4 desimal
     private static String formatDouble(double x) {
         if (x == 0) {
             return "0";
@@ -339,15 +357,29 @@ public class BicubicSplineInterpolation {
         return formatted;
     }
 
+    // String dibuat menjadi panjang n karakter dengan padding spasi di kanan
     private static String padRight(String s, int n) {
         return String.format("%-" + n + "s", s);
     }
 
+    // Getter & Setter
     public double getA() {
         return a;
     }
 
     public double getB() {
         return b;
+    }
+
+    public void setA(double a) {
+        this.a = a;
+    }
+
+    public void setB(double b) {
+        this.b = b;
+    }
+
+    public void setInputMatrix(double[][] inputMatrix) {
+        this.inputMatrix = inputMatrix;
     }
 }
