@@ -35,9 +35,11 @@ public class ImageInterpolator {
             System.out.println("Gambar berhasil diskalakan dan disimpan di " + outputImagePath);
         } catch (Exception e) {
             System.out.println("Terjadi kesalahan: " + e.getMessage());
+            e.printStackTrace(); // Untuk debugging
         }
     }
 
+    // Fungsi untuk melakukan interpolasi bicubic
     private BufferedImage resizeImage(BufferedImage inputImage, double scaleX, double scaleY) {
         int originalWidth = inputImage.getWidth();
         int originalHeight = inputImage.getHeight();
@@ -45,7 +47,7 @@ public class ImageInterpolator {
         int newWidth = (int)(originalWidth * scaleX);
         int newHeight = (int)(originalHeight * scaleY);
 
-        BufferedImage outputImage = new BufferedImage(newWidth, newHeight, inputImage.getType());
+        BufferedImage outputImage = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_RGB);
 
         int x = 0;
         while (x < newWidth) {
@@ -75,7 +77,7 @@ public class ImageInterpolator {
                 // Membatasi nilai piksel antara 0 dan 255
                 int rgbValue = clamp((int)interpolatedValue, 0, 255);
 
-                // Mengatur piksel pada gambar output
+                // Mengatur piksel pada gambar output (grayscale)
                 int rgb = (rgbValue << 16) | (rgbValue << 8) | rgbValue;
                 outputImage.setRGB(x, y, rgb);
 
@@ -87,6 +89,7 @@ public class ImageInterpolator {
         return outputImage;
     }
 
+    // Fungsi untuk mendapatkan matriks 4x4 piksel di sekitar (x, y)
     private double[][] getNeighborhoodPixels(BufferedImage image, int x, int y) {
         double[][] pixels = new double[4][4];
         int m = 0;
@@ -113,6 +116,7 @@ public class ImageInterpolator {
         return pixels;
     }
 
+    // Fungsi untuk membatasi nilai antara min dan max
     private int clamp(int value, int min, int max) {
         if (value < min) {
             return min;
@@ -123,6 +127,7 @@ public class ImageInterpolator {
         return value;
     }
 
+    // Fungsi untuk mendapatkan input double yang valid
     private double getValidDoubleInput(double min, double max) {
         double input;
         while (true) {
