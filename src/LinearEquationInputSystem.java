@@ -48,14 +48,8 @@ public class LinearEquationInputSystem {
 
     // Fungsi untuk input dari keyboard
     private void inputFromKeyboard() {
-        this.numEquations = readInt("\nMasukkan jumlah persamaan (1-5): ", 1, 5);
-        this.numVariables = readInt("Masukkan jumlah variabel (1-5): ", 1, 5);
-        
-        // Validasi bahwa numEquations dan numVariables berjumlah sama
-        if (this.numEquations > this.numVariables) {
-            System.out.println("Error: Jumlah persamaan harus kurang dari atau sama dengan jumlah variabel.");
-            return;
-        }
+        this.numEquations = readInt("\nMasukkan jumlah persamaan (1-10): ", 1, 10);
+        this.numVariables = readInt("Masukkan jumlah variabel (1-10): ", 1, 10);
         
         this.coefficients = new double[getNumVariables()][getNumVariables() + 1];
 
@@ -96,8 +90,13 @@ public class LinearEquationInputSystem {
                 }
                 rows++;
             }
-            this.numEquations = rows;
             this.numVariables = cols - 1; // Karena kolom terakhir adalah konstanta
+            if (rows > this.numVariables) {
+                this.numEquations = this.numVariables;
+            }
+            else {
+                this.numEquations = rows;
+            }
             this.coefficients = new double[numVariables][cols];
 
             fileScanner = new Scanner(new File(fileName)); // Restart untuk membaca ulang
