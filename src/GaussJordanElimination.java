@@ -51,35 +51,51 @@ public class GaussJordanElimination {
     public static double[][] gaussJordanElimination(double[][] matrix) {
         int rows = matrix.length;
         int cols = matrix[0].length;
-        for (int i = 0; i < rows; i++) {
-            if (matrix[i][i] == 0) {
+        int i = 0; // Baris
+        int j = 0; // Kolom
+        
+        while (i < rows && j < cols) {
+            // Jika elemen pivot (matrix[i][j]) adalah 0, coba tukar dengan baris di bawahnya
+            if (matrix[i][j] == 0) {
                 boolean swapped = false;
-                for (int j = i + 1; j < rows; j++) {
-                    if (matrix[j][i] != 0) {
-                        swapRows(matrix, i, j);
+                for (int k = i + 1; k < rows; k++) {
+                    if (matrix[k][j] != 0) {
+                        swapRows(matrix, i, k);
                         swapped = true;
                         break;
                     }
                 }
+                // Jika tidak ada baris yang dapat ditukar, lanjutkan ke kolom berikutnya
                 if (!swapped) {
-                    return matrix; // Singular matrix, no solution
+                    j++;
+                    continue;
                 }
             }
-            double pivot = matrix[i][i];
+    
+            // Bagi seluruh baris dengan nilai pivot untuk memastikan pivot menjadi 1
+            double pivot = matrix[i][j];
             for (int k = 0; k < cols; k++) {
                 matrix[i][k] /= pivot;
             }
-            for (int j = 0; j < rows; j++) {
-                if (j != i) {
-                    double factor = matrix[j][i];
-                    for (int k = 0; k < cols; k++) {
-                        matrix[j][k] -= factor * matrix[i][k];
+    
+            // Eliminasi di semua baris selain baris pivot
+            for (int k = 0; k < rows; k++) {
+                if (k != i) {
+                    double factor = matrix[k][j];
+                    for (int l = 0; l < cols; l++) {
+                        matrix[k][l] -= factor * matrix[i][l];
                     }
                 }
             }
+    
+            // Lanjutkan ke baris dan kolom berikutnya
+            i++;
+            j++;
         }
+    
         return matrix;
     }
+    
 
     public static int calculateRank(double[][] matrix) {
         int rank = 0;
@@ -165,7 +181,7 @@ public class GaussJordanElimination {
                 // Kurangi kontribusi dari variabel bebas pada baris ini
                 for (int j = pivotCol + 1; j < cols; j++) {
                     if (matrix[i][j] != 0) {
-                        equation.append(String.format("%.2f", -matrix[i][j]) + " * x" + (j + 1) + " ");
+                        equation.append(String.format("%.2f", -matrix[i][j]) + " * t" + (j + 1) + " ");
                     }
                 }
                 equation.append(String.format("+ %.2f", constant));
@@ -177,7 +193,7 @@ public class GaussJordanElimination {
         // Tambahkan solusi untuk variabel bebas
         for (int i = 0; i < cols; i++) {
             if (freeVariables[i] == 1) {
-                solutions[i] = "x" + (i + 1) + " = x" + (i + 1);
+                solutions[i] = "x" + (i + 1) + " = t" + (i + 1);
             }
         }
 

@@ -47,33 +47,49 @@ public class GaussElimination {
     public static double[][] gaussElimination(double[][] matrix) {
         int rows = matrix.length;
         int cols = matrix[0].length;
-
-        for (int i = 0; i < rows; i++) {
-            if (matrix[i][i] == 0) {
+        int i = 0; // Baris
+        int j = 0; // Kolom
+    
+        while (i < rows && j < cols) {
+            // Jika elemen pivot (matrix[i][j]) adalah 0, coba tukar dengan baris di bawahnya
+            if (matrix[i][j] == 0) {
                 boolean swapped = false;
-                for (int j = i + 1; j < rows; j++) {
-                    if (matrix[j][i] != 0) {
-                        swapRows(matrix, i, j);
+                for (int k = i + 1; k < rows; k++) {
+                    if (matrix[k][j] != 0) {
+                        swapRows(matrix, i, k);
                         swapped = true;
                         break;
                     }
                 }
+                // Jika tidak ada baris yang bisa ditukar, lanjutkan ke kolom berikutnya
                 if (!swapped) {
-                    return matrix; // Singular matrix, no solution
+                    j++;
+                    continue;
                 }
             }
-
-            // Eliminasi Gauss di bawah pivot
-            for (int j = i + 1; j < rows; j++) {
-                double factor = matrix[j][i] / matrix[i][i];
-                for (int k = i; k < cols; k++) {
-                    matrix[j][k] -= factor * matrix[i][k];
+    
+            // Bagi seluruh baris dengan nilai pivot untuk memastikan pivot menjadi 1
+            double pivot = matrix[i][j];
+            for (int k = j; k < cols; k++) {
+                matrix[i][k] /= pivot;
+            }
+    
+            // Lakukan eliminasi Gauss di bawah pivot
+            for (int k = i + 1; k < rows; k++) {
+                double factor = matrix[k][j];
+                for (int l = j; l < cols; l++) {
+                    matrix[k][l] -= factor * matrix[i][l];
                 }
             }
+    
+            // Lanjutkan ke baris dan kolom berikutnya
+            i++;
+            j++;
         }
-
+    
         return matrix;
     }
+    
 
     public static double[] backSubstitution(double[][] matrix) {
         int n = matrix.length;
@@ -130,46 +146,64 @@ public class GaussElimination {
 
         return false;
     }
+    
 
-    public static String[] parametricSolution(double[][] matrix, int rank) {
-        int n = matrix.length;
-        String[] solutions = new String[n];
-        boolean[] isFreeVariable = new boolean[n];  // Untuk menandai variabel bebas
-    
-        // Inisialisasi solusi parametrik
-        for (int i = rank - 1; i >= 0; i--) {
-            if (matrix[i][i] != 0) {
-                StringBuilder solution = new StringBuilder(String.format("%.2f", matrix[i][n]));
-    
-                for (int j = i + 1; j < n; j++) {
-                    if (!isFreeVariable[j]) {
-                        solution.append(String.format(" - %.2fx%d", matrix[i][j], j + 1));
-                    }
-                }
-    
-                solutions[i] = String.format("(%s) / %.2f", solution.toString(), matrix[i][i]);
-            } else {
-                isFreeVariable[i] = true;  // Menandai sebagai variabel bebas
-                solutions[i] = "p" + (i + 1);  // Variabel bebas ditandai sebagai p1, p2, dst.
+        public static String[] parametricSolutions(double[][] matrix, int rank) {
+        int rows = matrix.length;
+        int cols = matrix[0].length - 1; // Jumlah variabel (tidak termasuk kolom hasil)
+        
+        boolean[] isPivotColumn = new boolean[cols]; // Menandai kolom pivot
+        String[] solutions = new String[rows];
+        
+        // Tandai kolom mana yang merupakan pivot
+        for (int i = 0; i < rank; i++) {
+            for (int j = 0; j < cols; j++) {
+            if (matrix[i][j] != 0) {
+                isPivotColumn[j] = true;
+                break;
+            }
             }
         }
-    
-        // Variabel bebas sebagai parameter
-        for (int i = rank; i < n; i++) {
-            solutions[i] = "p" + (i + 1);
+        
+        // Inisialisasi solusi sebagai string
+        for (int i = 0; i < cols; i++) {
+            if (!isPivotColumn[i]) {
+            // Variabel bebas
+            solutions[i] = "x" + (i + 1) + " = t" + (i + 1) + " (variabel bebas)";
+            }
+        }
+        
+        // Proses solusi untuk variabel dasar
+        for (int i = rank - 1; i >= 0; i--) {
+            int pivotCol = -1;
+            for (int j = 0; j < cols; j++) {
+            if (matrix[i][j] != 0) {
+                pivotCol = j;
+                break;
+            }
+            }
+        
+            if (pivotCol != -1) {
+            StringBuilder solution = new StringBuilder("x" + (pivotCol + 1) + " = " + matrix[i][cols]); // Kolom hasil
+            // Mengurangi kontribusi variabel bebas dari solusi
+            for (int j = pivotCol + 1; j < cols; j++) {
+                if (matrix[i][j] != 0) {
+                    solution.append(" + ").append(-matrix[i][j]).append("*t").append(j + 1);
+                }
+            }
+            solutions[pivotCol] = solution.toString();
+            }
         }
         
         return solutions;
-    }
-    
-
-    
+        }
 
     private static void swapRows(double[][] matrix, int row1, int row2) {
         double[] temp = matrix[row1];
         matrix[row1] = matrix[row2];
         matrix[row2] = temp;
     }
+
 
     public static void printMatrix(double[][] matrix) {
         for (double[] row : matrix) {

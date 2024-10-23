@@ -1,7 +1,0 @@
-Sistem memiliki solusi banyak (parametrik).
-Solusi parametrik:
-x1 = 4,50 + 1,50x4 - 0,50x5
-x2 = 1,50 + 1,50x4 + 0,50x5
-x3 = p3
-x4 = p4
-x5 = p5
