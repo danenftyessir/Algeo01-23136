@@ -1,5 +1,5 @@
 public class Regresi {
-    // Melakukan regresi untuk Main Class
+    // Melakukan regresi linear
     public static double[] regresiLinear(double[][] data) {
         int n = data[0].length - 1;
         int m = data.length;
