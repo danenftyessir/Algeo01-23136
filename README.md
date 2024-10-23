@@ -5,16 +5,14 @@
   <img src="readme/Matriks%20Reeves%20Logo.jpg" alt="Matriks Reeves Logo" width="200"/>
 </div>
 
-
 Matriks Reeves merupakan program kalkulator mengenai Sistem Persamaan Linier (SPL), Determinan, Interpolasi Polinomial, Regresi Linier Berganda, dan Bicubic Spline Interpolation. Untuk cara penyelesaian SPL ada berbagai alternatif, menggunakan Metode Eliminasi Gauss, Gauss-Jordan, Matriks balikan, dan Kaidah Cramer.
-
 
 ### Kelompok Matriks Reeves
 
 **Kelompok 40 : Matriks Reeves**
 
 <div align="center">
-  <img src="readme/Anggota%20Matrix%20Reeves.jpg" alt="Anggota Matrix Reeves" width="200"/>
+  <img src="readme/Anggota%20Matrix%20Reeves.jpg" alt="Anggota Matrix Reeves" width="400"/>
 </div>
 
 | NIM | Nama |
