@@ -4,11 +4,12 @@
 
 Program mengenai Sistem Persamaan Linier (SPL), Determinan, Interpolasi Polinomial, Regresi Linier Berganda, dan Bicubic Spline Interpolation. Untuk cara penyelesaian SPL, menggunakan Metode Eliminasi Gauss, Gauss-Jordan, Matriks balikan, dan Kaidah Cramer.
 
-![Alt text](readme/Anggota%20Matrix%20Reeves.jpg)
 
 ### Kelompok Matriks Reeves
 
 **Kelompok 40 : Matriks Reeves**
+
+![Alt text](readme/Anggota%20Matrix%20Reeves.jpg)
 
 | NIM | Nama |
 |-----|------|
