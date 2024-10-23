@@ -15,11 +15,15 @@ Matriks Reeves merupakan program kalkulator mengenai Sistem Persamaan Linier (SP
   <img src="readme/Anggota%20Matrix%20Reeves.jpg" alt="Anggota Matrix Reeves" width="400"/>
 </div>
 
+<div align="center">
+
 | NIM | Nama |
 |-----|------|
 | 13523136 | Danendra Shafi Athallah |
 | 13523141| Jovandra Otniel P.S. |
 | 13523151 | Ardell Aghna Mahendra |
+
+</div>
 
 ## Quick Links
 
