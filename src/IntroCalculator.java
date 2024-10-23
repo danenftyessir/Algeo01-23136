@@ -77,7 +77,7 @@ public class IntroCalculator {
             case 5:
                 System.out.println("Anda memilih: Interpolasi Bicubic Spline");
                 BicubicSplineInterpolation bicubicSplineInterpolation = new BicubicSplineInterpolation();
-                bicubicSplineInterpolation.performBicubicSplineInterpolation();
+                bicubicSplineInterpolation.runInterpolation();
                 break;
             case 6:
                 System.out.println("Anda memilih: Regresi linier dan kuadratik berganda");

@@ -30,6 +30,16 @@ public class BicubicSplineInterpolation {
         this.dy = new double[MATRIX_SIZE][MATRIX_SIZE];
         this.dxy = new double[MATRIX_SIZE][MATRIX_SIZE];
     }
+    
+    public void setA(double a) {
+        this.a = a;
+    }
+    public void setB(double b) {
+        this.b = b;
+    }
+    public void setInputMatrix(double[][] inputMatrix) {
+        this.inputMatrix = inputMatrix;
+    }
 
     // Metode utama untuk menjalankan interpolasi
     public void runInterpolation() {
@@ -65,6 +75,7 @@ public class BicubicSplineInterpolation {
 
             if (this.inputMatrix == null) {
                 System.out.println("Gagal membaca data dari file. Program dihentikan.");
+                scanner.close();
                 return;
             }
         }
