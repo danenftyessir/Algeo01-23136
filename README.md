@@ -25,14 +25,6 @@ Matriks Reeves merupakan program kalkulator mengenai Sistem Persamaan Linier (SP
 
 </div>
 
-## Quick Links
-
-- [Features](#features)
-- [Step](#-step)
-- [Contributing](#contributing)
-- [Links](#links)
-- [Licensing](#licensing)
-
 ## Features
 
 1. Menyelesaikan Sistem Persamaan Linier (SPL)
@@ -50,7 +42,7 @@ Matriks Reeves merupakan program kalkulator mengenai Sistem Persamaan Linier (SP
 7. Peningkatan Kualitas Gambar
 8. Aritmatika Matriks
 
-## Step
+## Step by step
 
 Instruksi detail untuk instalasi dan penggunaan program akan ditampilkan segera.
 
@@ -60,7 +52,6 @@ Instruksi detail untuk instalasi dan penggunaan program akan ditampilkan segera.
 - [Repository]()
 - [Spesifikasi Tugas]()
 - [Laporan Tugas]()
-- [Issue tracker]()
 
 ## Licensing
 
