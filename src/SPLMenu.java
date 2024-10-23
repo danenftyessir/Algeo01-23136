@@ -60,8 +60,8 @@ public class SPLMenu {
                     System.out.println("\nHasil SPL:");
                     results.append("Hasil SPL:\n");
                     for (int i = 0; i < n; i++) {
-                        System.out.printf("x%d = %.2f\n", i + 1, solutions[i]);
-                        results.append(String.format("x%d = %.2f\n", i + 1, solutions[i]));
+                        System.out.printf("x%d = %.4f\n", i + 1, solutions[i]);
+                        results.append(String.format("x%d = %.4f\n", i + 1, solutions[i]));
                     }
                 }
                 System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
@@ -111,8 +111,8 @@ public class SPLMenu {
                     System.out.println("\nHasil SPL:");
                     results.append("Hasil SPL:\n");
                     for (int i = 0; i < n; i++) {
-                        System.out.printf("x%d = %.2f\n", i + 1, reducedRowEchelonForm[i][n]);
-                        results.append(String.format("x%d = %.2f\n", i + 1, reducedRowEchelonForm[i][n]));
+                        System.out.printf("x%d = %.4f\n", i + 1, reducedRowEchelonForm[i][n]);
+                        results.append(String.format("x%d = %.4f\n", i + 1, reducedRowEchelonForm[i][n]));
                     }
                 }
                 System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
@@ -155,8 +155,8 @@ public class SPLMenu {
                     System.out.println("\nSolusi SPL:");
                     results.append("Solusi SPL:\n");
                     for (int i = 0; i < n; i++) {
-                        System.out.printf("x%d = %.2f\n", i + 1, solution[i]);
-                        results.append(String.format("x%d = %.2f\n", i + 1, solution[i]));
+                        System.out.printf("x%d = %.4f\n", i + 1, solution[i]);
+                        results.append(String.format("x%d = %.4f\n", i + 1, solution[i]));
                     }
                 }
                 System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
@@ -200,8 +200,8 @@ public class SPLMenu {
                     System.out.println("\nSolusi SPL:");
                     results.append("Solusi SPL:\n");
                     for (int i = 0; i < n; i++) {
-                        System.out.printf("x%d = %.2f\n", i + 1, solution[i]);
-                        results.append(String.format("x%d = %.2f\n", i + 1, solution[i]));
+                        System.out.printf("x%d = %.4f\n", i + 1, solution[i]);
+                        results.append(String.format("x%d = %.4f\n", i + 1, solution[i]));
                     }
                 }
                 System.out.print("Apakah Anda ingin menyimpan hasil ke file? (y/n): ");
