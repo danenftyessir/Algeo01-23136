@@ -98,13 +98,13 @@ public class SPLMenu {
                     } else {
                         System.out.println("\nSistem memiliki solusi banyak (parametrik).");
                         results.append("Sistem memiliki solusi banyak (parametrik).\n");
-                        String[] parSolutions = GaussJordanElimination.parametricSolution(reducedRowEchelonForm, rank);
+                        String[] parSolutions = GaussJordanElimination.parametricSolutions(reducedRowEchelonForm, rank);
                         // Cetak solusi parametrik
-                        System.out.println("Solusi parametrik:");
-                        results.append("Solusi parametrik:\n");
-                        for (int i = 0; i < n; i++) {
-                            System.out.printf("x%d = %s\n", i + 1, parSolutions[i]);
-                            results.append(String.format("x%d = %s\n", i + 1, parSolutions[i]));
+                        System.out.println("Solusi Parametrik:");
+                        for (String solution : parSolutions) {
+                            if (solution != null) {
+                                System.out.println(solution);
+                            }
                         }
                     }
                 } else {

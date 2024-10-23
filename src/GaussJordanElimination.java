@@ -122,39 +122,65 @@ public class GaussJordanElimination {
         return false;
     }
 
-    public static String[] parametricSolution(double[][] matrix, int rank) {
-        int n = matrix[0].length - 1;  // Jumlah variabel (kolom matriks - 1 karena ada konstanta di kolom terakhir)
-        String[] solutions = new String[n];
-        boolean[] isFreeVariable = new boolean[n];  // Untuk menandai variabel bebas
-    
-        // Inisialisasi solusi parametrik
+    public static String[] parametricSolutions(double[][] matrix, int rank) {
+        int rows = matrix.length;
+        int cols = matrix[0].length - 1;  // kolom terakhir adalah hasil (right-hand side)
+        String[] solutions = new String[rows];
+        int[] freeVariables = new int[rows];
+        double[] solution = new double[rows];
+
+        // Inisialisasi semua variabel bebas
+        for (int i = 0; i < cols; i++) {
+            freeVariables[i] = 1;
+        }
+
+        // Identifikasi variabel terikat dan keluarkan dari daftar variabel bebas
         for (int i = 0; i < rank; i++) {
-            if (matrix[i][i] == 1) {  // Diagonal utama sudah 1 dalam bentuk Gauss-Jordan
-                StringBuilder solution = new StringBuilder(String.format("%.2f", matrix[i][n])); // Mulai dengan konstanta
-    
-                for (int j = i + 1; j < n; j++) {
-                    double coefficient = matrix[i][j];
-                    if (coefficient != 0) {
-                        if (coefficient < 0) {
-                            solution.append(String.format(" + %.2fx%d", -coefficient, j + 1));
-                        } else {
-                            solution.append(String.format(" - %.2fx%d", coefficient, j + 1));
-                        }
-                    }
+            int pivotCol = -1;
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] != 0) {
+                    pivotCol = j;
+                    break;
                 }
-    
-                solutions[i] = solution.toString();
-            } else {
-                isFreeVariable[i] = true;  // Menandai sebagai variabel bebas
-                solutions[i] = "p" + (i + 1);  // Variabel bebas ditandai sebagai p1, p2, dst.
+            }
+            if (pivotCol != -1) {
+                freeVariables[pivotCol] = 0; // Hapus variabel terikat dari daftar variabel bebas
             }
         }
-    
-        // Menandai variabel bebas yang tersisa sebagai parameter
-        for (int i = rank; i < n; i++) {
-            solutions[i] = "p" + (i + 1);
+
+        // Bangun solusi parametrik untuk variabel terikat
+        for (int i = rank - 1; i >= 0; i--) {
+            int pivotCol = -1;
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] != 0) {
+                    pivotCol = j;
+                    break;
+                }
+            }
+
+            if (pivotCol != -1) {
+                StringBuilder equation = new StringBuilder("x" + (pivotCol + 1) + " = ");
+                double constant = matrix[i][cols]; // Nilai di kolom paling kanan
+
+                // Kurangi kontribusi dari variabel bebas pada baris ini
+                for (int j = pivotCol + 1; j < cols; j++) {
+                    if (matrix[i][j] != 0) {
+                        equation.append(String.format("%.2f", -matrix[i][j]) + " * x" + (j + 1) + " ");
+                    }
+                }
+                equation.append(String.format("+ %.2f", constant));
+                solutions[pivotCol] = equation.toString();
+                solution[pivotCol] = constant;
+            }
         }
-    
+
+        // Tambahkan solusi untuk variabel bebas
+        for (int i = 0; i < cols; i++) {
+            if (freeVariables[i] == 1) {
+                solutions[i] = "x" + (i + 1) + " = x" + (i + 1);
+            }
+        }
+
         return solutions;
     }
     
