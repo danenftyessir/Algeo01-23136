@@ -10,16 +10,19 @@ Matriks Reeves merupakan program kalkulator mengenai Sistem Persamaan Linier (SP
 ### Kelompok Matriks Reeves
 
 <div align="center">
-  <strong>Kelompok 40 : Matriks Reeves</strong>
-  
-  <br/>
+  <h2><strong>Kelompok 40 : Matriks Reeves</strong></h2>
+
+  <br/><br/>
+
   <img src="readme/Anggota%20Matrix%20Reeves.jpg" alt="Anggota Matrix Reeves" width="400"/>
 
-| NIM | Nama |
-|-----|------|
-| 13523136 | Danendra Shafi Athallah |
-| 13523141| Jovandra Otniel P.S. |
-| 13523151 | Ardell Aghna Mahendra |
+  <br/><br/>
+
+  | **NIM**    | **Nama**                        |
+  |------------|---------------------------------|
+  | 13523136   | Danendra Shafi Athallah         |
+  | 13523141   | Jovandra Otniel P.S.            |
+  | 13523151   | Ardell Aghna Mahendra           |
 
 </div>
 
