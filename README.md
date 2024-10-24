@@ -1,133 +1,150 @@
-# Tugas Besar 1 IF2123 - Aljabar Linier dan Geometri Institut Teknologi Bandung Semester I Tahun 2024/2025
-
-## TOPIK : Sistem Persamaan Linier, Determinan, dan Aplikasinya
+# Kalkulator Matriks Reeves
 <div align="center">
-  <img src="readme/Matriks%20Reeves%20Logo.jpg" alt="Matriks Reeves Logo" width="200"/>
+  <img src="readme/Matriks%20Reeves%20Logo.jpg" alt="Logo Matriks Reeves" width="200"/>
 </div>
 
-Matriks Reeves merupakan program kalkulator mengenai Sistem Persamaan Linier (SPL), Determinan, Interpolasi Polinomial, Regresi Linier Berganda, dan Bicubic Spline Interpolation. Untuk cara penyelesaian SPL ada berbagai alternatif, menggunakan Metode Eliminasi Gauss, Gauss-Jordan, Matriks balikan, dan Kaidah Cramer.
+## Deskripsi Singkat
+Matriks Reeves merupakan program kalkulator yang dirancang untuk menyelesaikan berbagai perhitungan matematika, meliputi Sistem Persamaan Linier (SPL), Determinan, Interpolasi Polinomial, Regresi Linier Berganda, dan Interpolasi Bicubic Spline. Program ini menyediakan beberapa metode penyelesaian SPL, termasuk Metode Eliminasi Gauss, Gauss-Jordan, Matriks Balikan, dan Kaidah Cramer.
 
+## Anggota Kelompok 40
 <div align="center">
-  <span style="font-size: 20px; font-weight: bold;">Kelompok 40 : Matriks Reeves</span>
-
-  <br/><br/>
-
   <img src="readme/Anggota%20Matrix%20Reeves.jpg" alt="Anggota Matrix Reeves" width="400"/>
+</div>
 
-  <br/><br/>
+| NIM      | Nama                    |
+|----------|-------------------------|
+| 13523136 | Danendra Shafi Athallah |
+| 13523141 | Jovandra Otniel P.S.    |
+| 13523151 | Ardell Aghna Mahendra   |
 
-  | **NIM**    | **Nama**                        |
-  |------------|---------------------------------|
-  | 13523136   | Danendra Shafi Athallah         |
-  | 13523141   | Jovandra Otniel P.S.            |
-  | 13523151   | Ardell Aghna Mahendra           |
+## Fitur Program
 
+### 1. Penyelesaian Sistem Persamaan Linier (SPL)
+- Metode Eliminasi Gauss
+- Metode Eliminasi Gauss-Jordan
+- Metode Matriks Balikan
+- Kaidah Cramer
 
-## Features
+### 2. Perhitungan Determinan
+- Metode Ekspansi Kofaktor
+- Metode Reduksi Baris (OBE)
 
-1. Menyelesaikan Sistem Persamaan Linier (SPL)
-   - Metode Eliminasi Gauss
-   - Metode Eliminasi Gauss-Jordan
-   - Metode Matriks Balikan
-   - Kaidah Cramer
-2. Menghitung Determinan
-   - Metode Ekspansi Kofaktor
-   - Metode Reduksi Baris dengan OBE
-3. Menghitung Matriks Balikan (Invers)
-4. Menghitung Interpolasi Polinomial
-5. Menghitung Interpolasi Bicubic Spline
-6. Menghitung Regresi Linier dan Kuadratik Berganda
-7. Peningkatan Kualitas Gambar
-8. Aritmatika Matriks
+### 3. Operasi Matriks
+- Perhitungan Matriks Balikan (Invers)
+- Aritmatika Matriks
+  - Penjumlahan
+  - Pengurangan
+  - Perkalian
+  - Pembagian
+
+### 4. Operasi Matematika Lanjutan
+- Interpolasi Polinomial
+- Interpolasi Bicubic Spline
+- Regresi Linier dan Kuadratik Berganda
+
+### 5. Pengolahan Gambar
+- Peningkatan Kualitas Gambar dengan Interpolasi
 
 ## Struktur Direktori
-
+```
 kalkulator-matriks-reeves/
-├── bin/
-│   ├── AritmatikaMatriks.class
-│   ├── AritmatikaMatriksMenu.class
-│   ├── BasicOperationMatrix.class
-│   ├── BicubicSplineInterpolation.class
-│   ├── CramerRule.class
-│   ├── DeterminantCalculator.class
-│   ├── DeterminantMenu.class
-│   ├── DeterminantOperations.class
-│   ├── GaussElimination.class
-│   ├── GaussJordanElimination.class
-│   ├── ImageInterpolator.class
-│   ├── IntroCalculator.class
-│   ├── InverseMatrix.class
-│   ├── InverseMenu.class
-│   ├── LinearEquationInputSystem.class
-│   ├── Main.class
-│   ├── MatrixInputSystem.class
-│   ├── PolynomialInterpolationMenu.class
-│   ├── README.md
-│   ├── Regresi.class
-│   ├── RegresiMenu.class
-│   └── SPLMenu.class
-├── doc/
-│   ├── README.md
-│   └── readme/
-│       ├── Anggota Matrix Reeves.jpg
-│       └── Matriks Reeves Logo.jpg
-├── src/
-│   ├── AritmatikaMatriks.java
-│   ├── AritmatikaMatriksMenu.java
-│   ├── BasicOperationMatrix.java
-│   ├── BicubicSplineInterpolation.java
-│   ├── CramerRule.java
-│   ├── DeterminantCalculator.java
-│   ├── DeterminantMenu.java
-│   ├── DeterminantOperations.java
-│   ├── GaussElimination.java
-│   ├── GaussJordanElimination.java
-│   ├── ImageInterpolator.java
-│   ├── IntroCalculator.java
-│   ├── InverseMatrix.java
-│   ├── InverseMenu.java
-│   ├── LinearEquationInputSystem.java
-│   ├── MatrixInputSystem.java
-│   ├── MatrixUtility.java
-│   ├── PolynomialInterpolationMenu.java
-│   ├── README.md
-│   ├── Regresi.java
-│   ├── RegresiMenu.java
-│   ├── SPLMenu.java
-│   └── main.java
-├── test/
-│   ├── Bicubic1.txt
-│   ├── Bicubic2.txt
-│   ├── Bicubic3.txt
-│   ├── Bicubic4.txt
-│   ├── InterpolA.txt
-│   ├── SPL1a.txt
-│   ├── SPL1b.txt
-│   ├── SPL1c.txt
-│   ├── SPL1d10.txt
-│   ├── SPL1d6.txt
-│   ├── SPL2a.txt
-│   ├── SPL2b.txt
-│   ├── SPL3a.txt
-│   ├── SPL3b.txt
-│   ├── SoalNo4.txt
-│   └── SoalRegresi.txt
-├── LICENSE
-└── README.md
+├── bin/                            # File hasil kompilasi
+│   ├── AritmatikaMatriks.class     # Operasi aritmatika matriks
+│   ├── AritmatikaMatriksMenu.class # Menu operasi aritmatika
+│   ├── BasicOperationMatrix.class  # Operasi dasar matriks
+│   ├── BicubicSplineInterpolation.class  # Interpolasi bicubic spline
+│   ├── CramerRule.class           # Implementasi kaidah Cramer
+│   ├── DeterminantCalculator.class # Perhitungan determinan
+│   ├── DeterminantMenu.class      # Menu perhitungan determinan
+│   ├── DeterminantOperations.class # Operasi determinan
+│   ├── GaussElimination.class     # Eliminasi Gauss
+│   ├── GaussJordanElimination.class # Eliminasi Gauss-Jordan
+│   ├── ImageInterpolator.class    # Interpolasi gambar
+│   ├── IntroCalculator.class      # Tampilan awal kalkulator
+│   ├── InverseMatrix.class        # Perhitungan matriks balikan
+│   ├── InverseMenu.class          # Menu matriks balikan
+│   ├── LinearEquationInputSystem.class # Input sistem persamaan linear
+│   ├── Main.class                 # Program utama
+│   ├── MatrixInputSystem.class    # Sistem input matriks
+│   ├── PolynomialInterpolationMenu.class # Menu interpolasi polinomial
+│   ├── Regresi.class             # Perhitungan regresi
+│   ├── RegresiMenu.class         # Menu regresi
+│   └── SPLMenu.class             # Menu SPL
+│
+├── doc/                           # Dokumentasi
+│   ├── README.md                 # Dokumentasi utama
+│   └── readme/                   # Folder aset dokumentasi
+│       ├── Anggota Matrix Reeves.jpg  # Foto anggota tim
+│       └── Matriks Reeves Logo.jpg    # Logo program
+│
+├── src/                          # Kode sumber
+│   ├── AritmatikaMatriks.java    # Implementasi operasi aritmatika
+│   ├── AritmatikaMatriksMenu.java # Implementasi menu aritmatika
+│   ├── BasicOperationMatrix.java  # Implementasi operasi dasar
+│   ├── BicubicSplineInterpolation.java # Implementasi interpolasi bicubic
+│   ├── CramerRule.java           # Implementasi kaidah Cramer
+│   ├── DeterminantCalculator.java # Implementasi perhitungan determinan
+│   ├── DeterminantMenu.java      # Implementasi menu determinan
+│   ├── DeterminantOperations.java # Implementasi operasi determinan
+│   ├── GaussElimination.java     # Implementasi eliminasi Gauss
+│   ├── GaussJordanElimination.java # Implementasi Gauss-Jordan
+│   ├── ImageInterpolator.java    # Implementasi interpolasi gambar
+│   ├── IntroCalculator.java      # Implementasi tampilan awal
+│   ├── InverseMatrix.java        # Implementasi matriks balikan
+│   ├── InverseMenu.java          # Implementasi menu inverse
+│   ├── LinearEquationInputSystem.java # Implementasi input SPL
+│   ├── MatrixInputSystem.java    # Implementasi input matriks
+│   ├── MatrixUtility.java        # Utilitas operasi matriks
+│   ├── PolynomialInterpolationMenu.java # Implementasi menu interpolasi
+│   ├── Regresi.java             # Implementasi perhitungan regresi
+│   ├── RegresiMenu.java         # Implementasi menu regresi
+│   ├── SPLMenu.java             # Implementasi menu SPL
+│   └── main.java                 # Program utama
+│
+├── test/                         # File uji
+│   ├── Bicubic1.txt             # Data uji interpolasi bicubic 1
+│   ├── Bicubic2.txt             # Data uji interpolasi bicubic 2
+│   ├── Bicubic3.txt             # Data uji interpolasi bicubic 3
+│   ├── Bicubic4.txt             # Data uji interpolasi bicubic 4
+│   ├── InterpolA.txt            # Data uji interpolasi A
+│   ├── SPL1a.txt                # Data uji SPL metode 1a
+│   ├── SPL1b.txt                # Data uji SPL metode 1b
+│   ├── SPL1c.txt                # Data uji SPL metode 1c
+│   ├── SPL1d10.txt              # Data uji SPL metode 1d (10x10)
+│   ├── SPL1d6.txt               # Data uji SPL metode 1d (6x6)
+│   ├── SPL2a.txt                # Data uji SPL metode 2a
+│   ├── SPL2b.txt                # Data uji SPL metode 2b
+│   ├── SPL3a.txt                # Data uji SPL metode 3a
+│   ├── SPL3b.txt                # Data uji SPL metode 3b
+│   ├── SoalNo4.txt              # Data uji soal nomor 4
+│   └── SoalRegresi.txt          # Data uji regresi
+│
+├── LICENSE                       # Berkas lisensi
+└── README.md                     # Dokumentasi proyek
+```
 
-## Step by step
+## Cara Penggunaan
 
-Download Keseluruhan src
-Compile Semua File pada Folder src
-Run File main.java
-Pilih Menu Fungsi/Fitur yang Diinginkan
-Pilih Cara Input (keyboard / file)
-Pilih Menu Output yang Diinginkan
-Program Selesai Ketika Memilih Keluar
+### Prasyarat
+- Java Development Kit (JDK)
+- Java Runtime Environment (JRE)
 
-## Licensing
+### Langkah-langkah Penggunaan
+1. Unduh seluruh berkas pada folder `src`
+2. Lakukan kompilasi semua berkas Java
+3. Jalankan berkas `main.java`
+4. Pilih menu fungsi/fitur yang diinginkan
+5. Pilih cara input (keyboard/file)
+6. Pilih menu output yang diinginkan
+7. Program selesai ketika memilih keluar
 
-The code in this project is licensed under MIT license.
+## Format File Masukan
+- File teks (.txt)
+- Format sesuai dengan jenis operasi yang dipilih
+- Contoh file uji tersedia di folder `test`
+
+## Lisensi
+Kode dalam proyek ini dilisensikan di bawah lisensi MIT.
 
 ---
-
+**Catatan:** Program ini dibuat sebagai bagian dari Tugas Besar 1 IF2123 - Aljabar Linier dan Geometri, Institut Teknologi Bandung, Semester I Tahun 2024/2025.
