@@ -98,7 +98,6 @@ kalkulator-matriks-reeves/
 │   ├── InverseMenu.java          # Implementasi menu inverse
 │   ├── LinearEquationInputSystem.java # Implementasi input SPL
 │   ├── MatrixInputSystem.java    # Implementasi input matriks
-│   ├── MatrixUtility.java        # Utilitas operasi matriks
 │   ├── PolynomialInterpolationMenu.java # Implementasi menu interpolasi
 │   ├── Regresi.java             # Implementasi perhitungan regresi
 │   ├── RegresiMenu.java         # Implementasi menu regresi
