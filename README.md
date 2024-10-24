@@ -148,16 +148,20 @@ kalkulator-matriks-reeves/
 
 4. Jalankan program dengan perintah:
    ```bash
-   java -cp bin main
+   cd bin
+   ```
+   lalu:
+   ```bash
+   java main
    ```
 
-5. Pilih menu fungsi/fitur yang diinginkan
+6. Pilih menu fungsi/fitur yang diinginkan
 
-6. Pilih cara input (keyboard/file)
+7. Pilih cara input (keyboard/file)
 
-7. Pilih menu output yang diinginkan
+8. Pilih menu output yang diinginkan
 
-8. Program selesai ketika memilih keluar
+9. Program selesai ketika memilih keluar
 
 
 ## Format File Masukan
