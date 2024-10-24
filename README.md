@@ -75,8 +75,8 @@ kalkulator-matriks-reeves/
 │   ├── RegresiMenu.class         # Menu regresi
 │   └── SPLMenu.class             # Menu SPL
 │
-├── doc/                           # Dokumentasi
-│   ├── README.md                 # Dokumentasi utama
+├── doc/
+│   ├── README.md                 # Dokumentasi
 │   └── readme/                   # Folder aset dokumentasi
 │       ├── Anggota Matrix Reeves.jpg  # Foto anggota tim
 │       └── Matriks Reeves Logo.jpg    # Logo program
