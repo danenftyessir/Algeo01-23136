@@ -69,7 +69,7 @@ public class BicubicSplineInterpolation {
             inputFromKeyboard(scanner);
         } else {
             // Input melalui file
-            System.out.print("Masukkan nama file input (contoh: input.txt): ");
+            System.out.print("Masukkan nama file input (contoh: test/input.txt): ");
             String inputFileName = scanner.nextLine();
             readInputFromFile(inputFileName);
 
