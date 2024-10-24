@@ -22,24 +22,32 @@ public class RegresiMenu {
             subChoice = readInt();
         }
 
+        // pilih metode regresi
         switch (subChoice) {
             case 1:
                 System.out.println("Anda memilih: Regresi Linear Berganda");
                 inputSystem.inputMatrix();
                 double[][] dataLinear = inputSystem.getMatrix();
-                double[] koefisienLinear = Regresi.regresiLinear(dataLinear);
-                int nLinear = dataLinear[0].length - 1;
+                int n = dataLinear.length;
+                
+                // mengambil data kecuali data terakhir
+                double[][] regressionData = new double[n-1][dataLinear[0].length];
+                for (int i = 0; i < n-1; i++) {
+                    System.arraycopy(dataLinear[i], 0, regressionData[i], 0, dataLinear[0].length);
+                }
+                
+                double[] koefisienLinear = Regresi.regresiLinear(regressionData);
+                int nLinear = regressionData[0].length - 1;
                 String outputLinear = formatRegressionOutput(koefisienLinear, false, nLinear);
                 System.out.println("Hasil Regresi Linear Berganda:");
                 System.out.println(outputLinear);
 
-                System.out.println("Masukkan nilai-nilai x yang akan ditaksir:");
+                // menggunakan koefisien untuk menghitung nilai y
                 double[] xLinear = new double[nLinear];
                 for (int i = 0; i < nLinear; i++) {
-                    System.out.print("x" + (i + 1) + ": ");
-                    xLinear[i] = readDouble();
+                    xLinear[i] = dataLinear[n-1][i];
                 }
-
+                
                 double yLinear = Regresi.calculateY(koefisienLinear, xLinear, false);
                 System.out.printf("Nilai taksiran y untuk x yang diberikan: %.2f%n", yLinear);
 
@@ -52,6 +60,8 @@ public class RegresiMenu {
                 if (saveChoiceLinear.equalsIgnoreCase("y")) {
                     saveToFile(outputLinear + "\n\nNilai taksiran y untuk x yang diberikan: " + yLinear);
                 }
+                System.out.println("Tekan Enter untuk kembali ke menu utama!");
+                readLine();
                 break;
 
             case 2:
@@ -83,10 +93,9 @@ public class RegresiMenu {
                 if (saveChoiceKuadratik.equalsIgnoreCase("y")) {
                     saveToFile(outputKuadratik + "\n\nNilai taksiran y untuk x yang diberikan: " + yKuadratik);
                 }
+                System.out.println("Tekan Enter untuk kembali ke menu utama!");
+                readLine();
                 break;
-
-            default:
-                System.out.println("Pilihan tidak valid. Silakan coba lagi.");
         }
     }
 
