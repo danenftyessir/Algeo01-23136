@@ -6,16 +6,16 @@
 ## Deskripsi Singkat
 Matriks Reeves merupakan program kalkulator yang dirancang untuk menyelesaikan berbagai perhitungan matematika, meliputi Sistem Persamaan Linier (SPL), Determinan, Interpolasi Polinomial, Regresi Linier Berganda, dan Interpolasi Bicubic Spline. Program ini menyediakan beberapa metode penyelesaian SPL, termasuk Metode Eliminasi Gauss, Gauss-Jordan, Matriks Balikan, dan Kaidah Cramer.
 
-## Anggota Kelompok 40
+## Anggota Matriks Reeves
 <div align="center">
   <img src="readme/Anggota%20Matrix%20Reeves.jpg" alt="Anggota Matrix Reeves" width="400"/>
-</div>
 
 | NIM      | Nama                    |
 |----------|-------------------------|
 | 13523136 | Danendra Shafi Athallah |
 | 13523141 | Jovandra Otniel P.S.    |
 | 13523151 | Ardell Aghna Mahendra   |
+</div>
 
 ## Fitur Program
 
@@ -37,7 +37,7 @@ Matriks Reeves merupakan program kalkulator yang dirancang untuk menyelesaikan b
   - Perkalian
   - Pembagian
 
-### 4. Operasi Matematika Lanjutan
+### 4. Interpolasi
 - Interpolasi Polinomial
 - Interpolasi Bicubic Spline
 - Regresi Linier dan Kuadratik Berganda
@@ -77,7 +77,7 @@ kalkulator-matriks-reeves/
 │       ├── Anggota Matrix Reeves.jpg  # Foto anggota tim
 │       └── Matriks Reeves Logo.jpg    # Logo program
 │
-├── src/                          # Kode sumber
+├── src/                          
 │   ├── AritmatikaMatriks.java    # Implementasi operasi aritmatika
 │   ├── AritmatikaMatriksMenu.java # Implementasi menu aritmatika
 │   ├── BasicOperationMatrix.java  # Implementasi operasi dasar
@@ -101,7 +101,7 @@ kalkulator-matriks-reeves/
 │   ├── SPLMenu.java             # Implementasi menu SPL
 │   └── main.java                 # Program utama
 │
-├── test/                         # File uji
+├── test/   
 │   ├── Bicubic1.txt             # Data uji interpolasi bicubic 1
 │   ├── Bicubic2.txt             # Data uji interpolasi bicubic 2
 │   ├── Bicubic3.txt             # Data uji interpolasi bicubic 3
@@ -119,24 +119,42 @@ kalkulator-matriks-reeves/
 │   ├── SoalNo4.txt              # Data uji soal nomor 4
 │   └── SoalRegresi.txt          # Data uji regresi
 │
-├── LICENSE                       # Berkas lisensi
-└── README.md                     # Dokumentasi proyek
+├── LICENSE                       
+└── README.md          
 ```
 
-## Cara Penggunaan
+## Testing
 
 ### Prasyarat
 - Java Development Kit (JDK)
 - Java Runtime Environment (JRE)
 
-### Langkah-langkah Penggunaan
+### Step by step
 1. Unduh seluruh berkas pada folder `src`
-2. Lakukan kompilasi semua berkas Java
-3. Jalankan berkas `main.java`
-4. Pilih menu fungsi/fitur yang diinginkan
-5. Pilih cara input (keyboard/file)
-6. Pilih menu output yang diinginkan
-7. Program selesai ketika memilih keluar
+
+2. Buka terminal atau command prompt, navigasi ke direktori utama program
+   ```bash
+   cd path/to/kalkulator-matriks-reeves
+   ```
+
+3. Lakukan kompilasi semua berkas Java dengan perintah:
+   ```bash
+   javac -d bin src/*.java
+   ```
+
+4. Jalankan program dengan perintah:
+   ```bash
+   java -cp bin main
+   ```
+
+5. Pilih menu fungsi/fitur yang diinginkan
+
+6. Pilih cara input (keyboard/file)
+
+7. Pilih menu output yang diinginkan
+
+8. Program selesai ketika memilih keluar
+
 
 ## Format File Masukan
 - File teks (.txt)
