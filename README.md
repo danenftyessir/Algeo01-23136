@@ -139,7 +139,7 @@ kalkulator-matriks-reeves/
 
 2. Buka terminal atau command prompt, navigasi ke direktori utama program
    ```bash
-   cd path/to/kalkulator-matriks-reeves
+   cd <path>
    ```
 
 3. Lakukan kompilasi semua berkas Java dengan perintah:
