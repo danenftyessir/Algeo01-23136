@@ -62,8 +62,6 @@ public class RegresiMenu {
                         saveToFile(outputLinear + "\n\nNilai taksiran y untuk x yang diberikan: " + yLinear);
                     }
                 }
-                System.out.println("Tekan Enter untuk kembali ke menu utama!");
-                readLine();
                 break;
 
             case 2:
@@ -96,8 +94,6 @@ public class RegresiMenu {
                         saveToFile(outputKuadratik + "\n\nNilai taksiran y untuk x yang diberikan: " + yKuadratik);
                     }
                 }
-                System.out.println("Tekan Enter untuk kembali ke menu utama!");
-                readLine();
                 break;
         }
     }
