@@ -165,6 +165,7 @@ kalkulator-matriks-reeves/
 - File teks (.txt)
 - Format sesuai dengan jenis operasi yang dipilih
 - Contoh file uji tersedia di folder `test`
+- Ketika menginput program dari file, masukkan ```test/<namafile>.txt```, contoh: ```test/input.txt```
 
 ## Lisensi
 Kode dalam proyek ini dilisensikan di bawah lisensi MIT.
