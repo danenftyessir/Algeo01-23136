@@ -78,44 +78,44 @@ public class LinearEquationInputSystem {
         String fileName = scanner.nextLine();
 
 
-        try{
         try {
-            Scanner fileScanner = new Scanner(new File(fileName));
-            int rows = 0;
-            int cols = 0;
-            while (fileScanner.hasNextLine()) {
-                String[] line = fileScanner.nextLine().split(" ");
-                if (rows == 0) {
-                    cols = line.length;
+            try {
+                Scanner fileScanner = new Scanner(new File(fileName));
+                int rows = 0;
+                int cols = 0;
+                while (fileScanner.hasNextLine()) {
+                    String[] line = fileScanner.nextLine().split(" ");
+                    if (rows == 0) {
+                        cols = line.length;
+                    }
+                    rows++;
                 }
-                rows++;
-            }
-            this.numVariables = cols - 1; // Karena kolom terakhir adalah konstanta
-            if (rows > this.numVariables) {
-                this.numEquations = this.numVariables;
-            }
-            else {
-                this.numEquations = rows;
-            }
-            this.coefficients = new double[numVariables][cols];
-
-            fileScanner = new Scanner(new File(fileName)); // Restart untuk membaca ulang
-            for (int i = 0; i < numEquations; i++) {
-                String[] line = fileScanner.nextLine().split(" ");
-                for (int j = 0; j < cols; j++) {
-                    coefficients[i][j] = Double.parseDouble(line[j]);
+                this.numVariables = cols - 1; // Karena kolom terakhir adalah konstanta
+                if (rows > this.numVariables) {
+                    this.numEquations = this.numVariables;
                 }
-            }
-            for (int i = numEquations; i < numVariables; i++) {
-                for (int j = 0; j < cols; j++) {
-                    coefficients[i][j] = 0;
+                else {
+                    this.numEquations = rows;
                 }
+                this.coefficients = new double[numVariables][cols];
+            
+                fileScanner = new Scanner(new File(fileName)); // Restart untuk membaca ulang
+                for (int i = 0; i < numEquations; i++) {
+                    String[] line = fileScanner.nextLine().split(" ");
+                    for (int j = 0; j < cols; j++) {
+                        coefficients[i][j] = Double.parseDouble(line[j]);
+                    }
+                }
+                for (int i = numEquations; i < numVariables; i++) {
+                    for (int j = 0; j < cols; j++) {
+                        coefficients[i][j] = 0;
+                    }
+                }
+                fileScanner.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("Error: File tidak ditemukan.");
+                scanner.close();
             }
-            fileScanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: File tidak ditemukan.");
-            scanner.close();
-        }
     } catch (Exception e) {
         System.out.println("Error: Terjadi kesalahan saat membaca file.");
     }
