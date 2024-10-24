@@ -1,8 +1,11 @@
-<div align="center">
-# Kalkulator Matriks Reeves
-</div>
+<h1 align="center" style="font-size: 3em;">Kalkulator Matriks Reeves</h1>
+
 <div align="center">
   <img src="readme/Matriks%20Reeves%20Logo.jpg" alt="Logo Matriks Reeves" width="200"/>
+  <br><br>
+  <p style="font-style: italic;">Tugas Besar 1 IF2123 - Aljabar Linier dan Geometri</p>
+  <p style="font-style: italic;">Institut Teknologi Bandung</p>
+  <p style="font-style: italic;">Semester I Tahun 2024/2025</p>
 </div>
 
 ## Deskripsi Singkat
