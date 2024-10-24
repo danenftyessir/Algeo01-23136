@@ -48,7 +48,7 @@ public class MatrixInputSystem {
 
     private void inputFromFile() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Masukkan nama file (misalnya: input.txt): ");
+        System.out.print("Masukkan nama file (misalnya: ../test/input.txt): ");
         String fileName = scanner.nextLine();
 
 
