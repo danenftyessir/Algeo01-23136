@@ -196,9 +196,9 @@ public class BicubicSplineInterpolation {
         System.out.println("\n╔══════════════════════════════════════╗");
         System.out.println("║  HASIL BICUBIC SPLINE INTERPOLATION  ║");
         System.out.println("╠══════════════════════════════════════╣");
-        System.out.println("║ f(" + formatDouble(this.a) + ", " +
+        System.out.println("  f(" + formatDouble(this.a) + ", " +
                 formatDouble(this.b) + ") = " +
-                padRight(formatDouble(result), 27) + "║");
+                padRight(formatDouble(result), 27));
         System.out.println("╚══════════════════════════════════════╝");
 
         // Menyimpan output ke file dengan nama yang ditentukan

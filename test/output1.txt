@@ -1,0 +1,2 @@
+Taksiran nilai fungsi:
+f(0.0000, 0.0000) = 21.0000
