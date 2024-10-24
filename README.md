@@ -10,7 +10,7 @@ Matriks Reeves merupakan program kalkulator mengenai Sistem Persamaan Linier (SP
 ### Kelompok Matriks Reeves
 
 <div align="center">
-  <h2><strong>Kelompok 40 : Matriks Reeves</strong></h2>
+  <strong style="font-weight: bold;">Kelompok 40 : Matriks Reeves</strong>
 
   <br/><br/>
 
@@ -25,6 +25,7 @@ Matriks Reeves merupakan program kalkulator mengenai Sistem Persamaan Linier (SP
   | 13523151   | Ardell Aghna Mahendra           |
 
 </div>
+
 
 ## Features
 
