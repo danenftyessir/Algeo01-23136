@@ -137,7 +137,7 @@ public class RegresiMenu {
     }
 
     private static double[][] inputFromFile() {
-        System.out.print("Masukkan nama file: ");
+        System.out.print("Masukkan nama file (misalnya: test/input.txt) : ");
         String filename = readLine();
 
         List<double[]> rows = new ArrayList<>();
