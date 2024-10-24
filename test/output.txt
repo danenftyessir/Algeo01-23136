@@ -1,2 +1,0 @@
-Taksiran nilai fungsi:
-f(0.1000, 0.9000) = 92.9625
