@@ -40,7 +40,6 @@ Matriks Reeves merupakan program kalkulator yang dirancang untuk menyelesaikan b
   - Penjumlahan
   - Pengurangan
   - Perkalian
-  - Pembagian
 
 ### 4. Interpolasi
 - Interpolasi Polinomial
