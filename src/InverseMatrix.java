@@ -43,7 +43,6 @@ public class InverseMatrix {
                 }
             }
         }
-
         // Membuat matriks balikan dari bagian kanan matriks augmented [I | B^(-1)]
         double[][] inverseMatrix = new double[n][n];
         for (int i = 0; i < n; i++) {
