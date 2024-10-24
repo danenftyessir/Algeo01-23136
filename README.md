@@ -110,7 +110,14 @@ kalkulator-matriks-reeves/
 │   ├── Bicubic2.txt             # Data uji interpolasi bicubic 2
 │   ├── Bicubic3.txt             # Data uji interpolasi bicubic 3
 │   ├── Bicubic4.txt             # Data uji interpolasi bicubic 4
-│   ├── InterpolA.txt            # Data uji interpolasi A
+│   ├── InterpolA1.txt           # Data uji interpolasi A
+│   ├── InterpolA2.txt           # Data uji interpolasi A
+│   ├── InterpolA3.txt           # Data uji interpolasi A
+│   ├── InterpolA4.txt           # Data uji interpolasi A
+│   ├── InterpolBa.txt           # Data uji interpolasi B
+│   ├── InterpolBb.txt           # Data uji interpolasi B
+│   ├── InterpolBc.txt           # Data uji interpolasi B
+│   ├── InterpolBd.txt           # Data uji interpolasi B
 │   ├── SPL1a.txt                # Data uji SPL metode 1a
 │   ├── SPL1b.txt                # Data uji SPL metode 1b
 │   ├── SPL1c.txt                # Data uji SPL metode 1c
