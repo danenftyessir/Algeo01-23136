@@ -136,7 +136,7 @@ kalkulator-matriks-reeves/
 ### Step by step
 1. Unduh seluruh berkas pada folder `src`
 
-2. Buka terminal atau command prompt, navigasi ke direktori utama program
+2. Buka terminal atau command prompt, navigasi ke direktori utama program (masukkan sesuai path masing-masing)
    ```bash
    cd <path>
    ```
